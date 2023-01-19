@@ -1,17 +1,17 @@
 cmake_minimum_required(VERSION 3.22.1)
-project(gtest_primer)
+project(raytracer)
 
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 include(FetchContent)
 
-add_library(raytracer
+set(SOURCES 
+    src/main.cpp 
     src/matrix.hpp 
 )
 
-add_executable(app src/main.cpp)
-target_link_libraries(app raytracer)
+add_executable(${PROJECT_NAME} ${SOURCES})
 
 # Get GoogleTest
 FetchContent_Declare(
@@ -24,10 +24,10 @@ set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
 FetchContent_MakeAvailable(googletest)
 
 # Create tests
-# enable_testing()
+enable_testing()
 
-# add_executable(hello_test hello_test.cpp)
-# target_link_libraries(hello_test GTest::gtest_main)
+add_executable(matrix_test src/matrix.test.cpp)
+target_link_libraries(matrix_test GTest::gtest_main)
 
-# include(GoogleTest)
-# gtest_discover_tests(hello_test)
+include(GoogleTest)
+gtest_discover_tests(matrix_test)
