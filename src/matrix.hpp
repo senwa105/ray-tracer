@@ -7,9 +7,16 @@
 template <typename T, size_t M, size_t N>
 class Matrix {
 private:
-    std::array<T, M*N> entries;
+    std::array<T, M*N> entries_;
 
 public:
+    // construct zero matrix by default
+    Matrix() = default;
+    // construct matrix from array
+    Matrix(std::array<T, M*N>&& entries)
+        : entries_(entries)
+    {}
+
     size_t GetRowCount() const;
     size_t GetColCount() const;
 
@@ -37,6 +44,10 @@ public:
 
     // negation
     Matrix<T, M, N> operator-() const;
+
+    // comparison
+    friend bool operator==(const Matrix& m1, const Matrix& m2);
+    friend bool operator!=(const Matrix& m1, const Matrix& m2);
 
     // operator <<
     friend std::ostream& operator<<(std::ostream& os, const Matrix<T,m,n>& m);
