@@ -7,8 +7,7 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 include(FetchContent)
 
 add_library(raytracer
-    src/matrix.h 
-    src/matrix.cpp 
+    src/matrix.hpp 
 )
 
 add_executable(app src/main.cpp)
