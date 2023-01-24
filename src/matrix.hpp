@@ -4,7 +4,13 @@
 #include <array>
 #include <iostream>
 
-
+template <typename T, size_t M, size_t N> class Matrix;
+typedef Matrix<int,   2, 2> Matrix2i;
+typedef Matrix<int,   3, 3> Matrix3i;
+typedef Matrix<int,   4, 4> Matrix4i;
+typedef Matrix<float, 2, 2> Matrix2f;
+typedef Matrix<float, 3, 3> Matrix3f;
+typedef Matrix<float, 4, 4> Matrix4f;
 
 template <typename T, size_t M, size_t N>
 class Matrix {
