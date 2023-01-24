@@ -60,14 +60,14 @@ public:
         return Matrix(new_entries);
     }
     // scalar multiplication
-    friend Matrix<T, M, N> operator*(const Matrix& m, const T& s) {
+    friend constexpr Matrix<T, M, N> operator*(const Matrix& m, const T& s) {
         std::array new_entries = m.entries_;
         for (T &e : new_entries)
             e *= s;
         return Matrix(new_entries);
     }
 
-    friend Matrix<T, M, N> operator*(const T& s, const Matrix& m) {
+    friend constexpr Matrix<T, M, N> operator*(const T& s, const Matrix& m) {
         return m * s;
     }
 
@@ -84,9 +84,20 @@ public:
         return *this * -1;
     }
 
-    // // comparison
-    // friend bool operator==(const Matrix& m1, const Matrix& m2);
-    // friend bool operator!=(const Matrix& m1, const Matrix& m2);
+    // comparison
+    friend constexpr bool operator==(const Matrix& m1, const Matrix& m2) {
+        for (int i = 0; i < M*N; ++i)
+            if (m1.entries_[i] != m2.entries_[i])
+                return false;
+        return true;
+    }
+
+    friend constexpr bool operator!=(const Matrix& m1, const Matrix& m2) {
+        for (int i = 0; i < M*N; ++i)
+            if (m1.entries_[i] != m2.entries_[i])
+                return true;
+        return false;
+    }
 
     // operator <<
     friend std::ostream& operator<<(std::ostream& os, const Matrix& m) {
