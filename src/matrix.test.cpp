@@ -70,3 +70,9 @@ TEST(MatrixTest, ScalarMultiplication) {
     Matrix2f d({-1.5f, -1.5f, -1.5f, -1.5f});
     EXPECT_EQ(c * -1.5, d);
 }
+
+TEST(MatrixTest, Negation) {
+    Matrix2i a({1, 2, 3, 4});
+    Matrix2i b({-1, -2, -3, -4});
+    EXPECT_EQ(-a, b);
+}
