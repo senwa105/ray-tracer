@@ -29,8 +29,8 @@ public:
     size_t GetColCount() const { return N; }
 
     // use operator() as the subscript operator
-    T& operator()(size_t row, size_t col);
-    const T& operator()(size_t row, size_t col) const;
+    T& operator()(size_t row, size_t col)             { return entries_[row*M + col]; }
+    const T& operator()(size_t row, size_t col) const { return entries_[row*M + col]; }
 
     // // scalar addition
     // friend Matrix<T, M, N> operator+<>(const Matrix<T, M, N>& m, const T& s);
@@ -58,33 +58,15 @@ public:
     // friend bool operator!=<>(const Matrix& m1, const Matrix& m2);
 
     // operator <<
-    friend std::ostream& operator<<<>(std::ostream& os, const Matrix<T, M, N>& m);
-};
+    friend std::ostream& operator<<(std::ostream& os, const Matrix<T, M, N>& m) {
+        for (int i = 0; i < M; i++) {
+            for (int j = 0; j < N; j++)
+                os << m(i, j) << ' ';
+            os << '\n';
+        }
 
-template <typename T, size_t M, size_t N>
-Matrix<T, M, N> operator+(const Matrix<T, M, N>& m, const T& s) {
-    
-}
-
-template <typename T, size_t M, size_t N>
-T& Matrix<T, M, N>::operator()(size_t row, size_t col) {
-    return entries_[row*M + col];
-}
-
-template <typename T, size_t M, size_t N>
-const T& Matrix<T, M, N>::operator()(size_t row, size_t col) const {
-    return entries_[row*M + col];
-}
-
-template <typename T, size_t M, size_t N>
-std::ostream& operator<<(std::ostream& os, const Matrix<T, M, N>& m) {
-    for (int i = 0; i < M; i++) {
-        for (int j = 0; j < N; j++)
-            os << m(i, j) << ' ';
-        os << '\n';
+        return os;
     }
-
-    return os;
-}
+};
 
 #endif
