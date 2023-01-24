@@ -60,3 +60,13 @@ TEST(MatrixTest, ScalarSubtraction) {
     Matrix2f d({-1.5f, -1.5f, -1.5f, -1.5f});
     EXPECT_EQ(c - 1.5, d);
 }
+
+TEST(MatrixTest, ScalarMultiplication) {
+    Matrix2i a({1, 2, 3, 4});
+    Matrix2i b({2, 4, 6, 8});
+    EXPECT_EQ(a * 2, b);
+
+    Matrix2f c({1.0f, 1.0f, 1.0f, 1.0f});
+    Matrix2f d({-1.5f, -1.5f, -1.5f, -1.5f});
+    EXPECT_EQ(c * -1.5, d);
+}
