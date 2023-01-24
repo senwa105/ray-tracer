@@ -33,7 +33,7 @@ public:
     T& operator()(size_t row, size_t col)             { return entries_[row*M + col]; }
     const T& operator()(size_t row, size_t col) const { return entries_[row*M + col]; }
 
-    // // scalar addition
+    // scalar addition
     friend constexpr Matrix operator+(const Matrix& m, const T& s) {
         std::array new_entries = m.entries_;
         for (T &e : new_entries)
@@ -45,7 +45,7 @@ public:
         return m + s;
     }
 
-    // // scalar subtraction
+    // scalar subtraction
     friend constexpr Matrix<T, M, N> operator-(const Matrix& m, const T& s) {
         std::array new_entries = m.entries_;
         for (T &e : new_entries)
@@ -59,9 +59,17 @@ public:
             e = s - e;
         return Matrix(new_entries);
     }
-    // // scalar multiplication
-    // friend Matrix<T, M, N> operator*(const Matrix& m, const T& s);
-    // friend Matrix<T, M, N> operator*(const T& s, const Matrix& m);
+    // scalar multiplication
+    friend Matrix<T, M, N> operator*(const Matrix& m, const T& s) {
+        std::array new_entries = m.entries_;
+        for (T &e : new_entries)
+            e *= s;
+        return Matrix(new_entries);
+    }
+
+    friend Matrix<T, M, N> operator*(const T& s, const Matrix& m) {
+        return m * s;
+    }
 
     // // matrix addition
     // friend Matrix<T, M, N> operator+(const Matrix& m1, const Matrix& m2);
