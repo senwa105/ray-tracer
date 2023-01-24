@@ -15,6 +15,14 @@ TEST(MatrixTest, GetColCount) {
     EXPECT_EQ(b.GetColCount(), 23);
 }
 
+TEST(MatrixTest, SubscriptOperator) {
+    Matrix2i a({1, 2, 3, 4});
+    EXPECT_EQ(1, a(0,0));
+    EXPECT_EQ(2, a(0,1));
+    EXPECT_EQ(3, a(1,0));
+    EXPECT_EQ(4, a(1,1));
+}
+
 TEST(MatrixTest, FloatComparison) {
     Matrix2f a({1.0f, 2.0f, 3.0f, 4.0f});
     Matrix2f b({1.1f, 2.2f, 3.3f, 4.4f});
