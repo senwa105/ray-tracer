@@ -19,11 +19,12 @@ private:
 
 public:
     // construct zero matrix by default
-    Matrix() = default;
-    // construct matrix from array
-    Matrix(std::array<T, M*N>&& entries)
-        : entries_(entries)
-    {}
+    constexpr Matrix() = default;
+    // construct matrix from array literal
+    constexpr Matrix(const T (&list)[M*N]) {
+        for (int i = 0; i < M*N; ++i)
+            entries_[i] = list[i];
+    }
 
     size_t GetRowCount() const { return M; }
     size_t GetColCount() const { return N; }
