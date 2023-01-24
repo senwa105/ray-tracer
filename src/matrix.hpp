@@ -33,32 +33,32 @@ public:
     const T& operator()(size_t row, size_t col) const { return entries_[row*M + col]; }
 
     // // scalar addition
-    // friend Matrix<T, M, N> operator+<>(const Matrix<T, M, N>& m, const T& s);
-    // friend Matrix<T, M, N> operator+<>(const T& s, const Matrix<T, M, N>& m);
+    // friend Matrix operator+(const Matrix& m, const T& s);
+    // friend Matrix operator+(const T& s, const Matrix& m);
     // // scalar subtraction
-    // friend Matrix<T, M, N> operator-<>(const Matrix<T, M, N>& m, const T& s);
-    // friend Matrix<T, M, N> operator-<>(const T& s, const Matrix<T, M, N>& m);
+    // friend Matrix<T, M, N> operator-(const Matrix& m, const T& s);
+    // friend Matrix<T, M, N> operator-(const T& s, const Matrix& m);
     // // scalar multiplication
-    // friend Matrix<T, M, N> operator*<>(const Matrix<T, M, N>& m, const T& s);
-    // friend Matrix<T, M, N> operator*<>(const T& s, const Matrix<T, M, N>& m);
+    // friend Matrix<T, M, N> operator*(const Matrix& m, const T& s);
+    // friend Matrix<T, M, N> operator*(const T& s, const Matrix& m);
 
     // // matrix addition
-    // friend Matrix<T, M, N> operator+<>(const Matrix<T, M, N>& m1, const Matrix<T, M, N>& m2);
+    // friend Matrix<T, M, N> operator+(const Matrix& m1, const Matrix& m2);
     // // matrix subtraction
-    // friend Matrix<T, M, N> operator-<>(const Matrix<T, M, N>& m1, const Matrix<T, M, N>& m2);
+    // friend Matrix<T, M, N> operator-(const Matrix& m1, const Matrix& m2);
     // // matrix multiplication
     // template <int O>
-    // friend Matrix<T, M, O> operator*(const Matrix<T, M, N>& m1, const Matrix<T, N, O>& m2);
+    // friend Matrix<T, M, O> operator*(const Matrix& m1, const Matrix& m2);
 
     // // negation
     // Matrix<T, M, N> operator-() const;
 
     // // comparison
-    // friend bool operator==<>(const Matrix& m1, const Matrix& m2);
-    // friend bool operator!=<>(const Matrix& m1, const Matrix& m2);
+    // friend bool operator==(const Matrix& m1, const Matrix& m2);
+    // friend bool operator!=(const Matrix& m1, const Matrix& m2);
 
     // operator <<
-    friend std::ostream& operator<<(std::ostream& os, const Matrix<T, M, N>& m) {
+    friend std::ostream& operator<<(std::ostream& os, const Matrix& m) {
         for (int i = 0; i < M; i++) {
             for (int j = 0; j < N; j++)
                 os << m(i, j) << ' ';
