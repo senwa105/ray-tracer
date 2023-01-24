@@ -21,7 +21,7 @@ public:
     // construct zero matrix by default
     constexpr Matrix() = default;
     // construct matrix from array literal
-    constexpr Matrix(const T (&list)[M*N]) {
+    constexpr Matrix(const std::array<const T, M*N> list) {
         for (int i = 0; i < M*N; ++i)
             entries_[i] = list[i];
     }
@@ -34,8 +34,16 @@ public:
     const T& operator()(size_t row, size_t col) const { return entries_[row*M + col]; }
 
     // // scalar addition
-    // friend Matrix operator+(const Matrix& m, const T& s);
-    // friend Matrix operator+(const T& s, const Matrix& m);
+    // friend constexpr Matrix operator+(const Matrix& m, const T& s) {
+    //     for (T &e : entries_)
+    //         e += s;
+    // }
+
+    // friend constexpr Matrix operator+(const T& s, const Matrix& m) {
+    //     for (T &e : entries_)
+    //         e += s;
+    // }
+
     // // scalar subtraction
     // friend Matrix<T, M, N> operator-(const Matrix& m, const T& s);
     // friend Matrix<T, M, N> operator-(const T& s, const Matrix& m);
