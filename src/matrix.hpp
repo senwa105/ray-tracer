@@ -79,8 +79,10 @@ public:
     // template <int O>
     // friend Matrix<T, M, O> operator*(const Matrix& m1, const Matrix& m2);
 
-    // // negation
-    // Matrix<T, M, N> operator-() const;
+    // negation
+    Matrix<T, M, N> operator-() const {
+        return *this * -1;
+    }
 
     // // comparison
     // friend bool operator==(const Matrix& m1, const Matrix& m2);
