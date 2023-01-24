@@ -4,6 +4,8 @@
 #include <array>
 #include <iostream>
 
+
+
 template <typename T, size_t M, size_t N>
 class Matrix {
 private:
@@ -17,8 +19,8 @@ public:
         : entries_(entries)
     {}
 
-    size_t GetRowCount() const;
-    size_t GetColCount() const;
+    size_t GetRowCount() const { return M; }
+    size_t GetColCount() const { return N; }
 
     // use operator() as the subscript operator
     T& operator()(size_t row, size_t col);
