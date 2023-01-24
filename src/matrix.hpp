@@ -46,8 +46,19 @@ public:
     }
 
     // // scalar subtraction
-    // friend Matrix<T, M, N> operator-(const Matrix& m, const T& s);
-    // friend Matrix<T, M, N> operator-(const T& s, const Matrix& m);
+    friend constexpr Matrix<T, M, N> operator-(const Matrix& m, const T& s) {
+        std::array new_entries = m.entries_;
+        for (T &e : new_entries)
+            e -= s;
+        return Matrix(new_entries);
+    }
+
+    friend constexpr Matrix<T, M, N> operator-(const T& s, const Matrix& m) {
+        std::array new_entries = m.entries_;
+        for (T &e : new_entries)
+            e = s - e;
+        return Matrix(new_entries);
+    }
     // // scalar multiplication
     // friend Matrix<T, M, N> operator*(const Matrix& m, const T& s);
     // friend Matrix<T, M, N> operator*(const T& s, const Matrix& m);
