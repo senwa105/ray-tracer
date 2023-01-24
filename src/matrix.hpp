@@ -4,17 +4,22 @@
 #include <array>
 #include <iostream>
 
+constexpr double EPSILON = 0.00001;     // allowed error for floating point comparison
+
 template <typename T, size_t M, size_t N> class Matrix;
-typedef Matrix<int,   2, 2> Matrix2i;
-typedef Matrix<int,   3, 3> Matrix3i;
-typedef Matrix<int,   4, 4> Matrix4i;
-typedef Matrix<float, 2, 2> Matrix2f;
-typedef Matrix<float, 3, 3> Matrix3f;
-typedef Matrix<float, 4, 4> Matrix4f;
+template <size_t M, size_t N> class MatrixFloat;
+
+// typedefs for common matrices
+typedef Matrix<int, 2, 2> Matrix2i;
+typedef Matrix<int, 3, 3> Matrix3i;
+typedef Matrix<int, 4, 4> Matrix4i;
+typedef MatrixFloat<2, 2> Matrix2f;
+typedef MatrixFloat<3, 3> Matrix3f;
+typedef MatrixFloat<4, 4> Matrix4f;
 
 template <typename T, size_t M, size_t N>
 class Matrix {
-private:
+protected:
     std::array<T, M*N> entries_{};
 
 public:
@@ -77,7 +82,7 @@ public:
     // friend Matrix<T, M, N> operator-(const Matrix& m1, const Matrix& m2);
     // // matrix multiplication
     // template <int O>
-    // friend Matrix<T, M, O> operator*(const Matrix& m1, const Matrix& m2);
+    // friend Matrix<T, M, O> operator*(const Matrix<T, M, N>& m1, const Matrix<T, N, O>& m2);
 
     // negation
     Matrix<T, M, N> operator-() const {
@@ -85,14 +90,14 @@ public:
     }
 
     // comparison
-    friend constexpr bool operator==(const Matrix& m1, const Matrix& m2) {
+    friend constexpr bool operator==(const Matrix<T, M, N>& m1, const Matrix<T, M, N>& m2) {
         for (int i = 0; i < M*N; ++i)
             if (m1.entries_[i] != m2.entries_[i])
                 return false;
         return true;
     }
 
-    friend constexpr bool operator!=(const Matrix& m1, const Matrix& m2) {
+    friend constexpr bool operator!=(const Matrix<T, M, N>& m1, const Matrix<T, M, N>& m2) {
         for (int i = 0; i < M*N; ++i)
             if (m1.entries_[i] != m2.entries_[i])
                 return true;
@@ -110,5 +115,36 @@ public:
         return os;
     }
 };
+
+// Pseudo partial template specialization for floats
+template <size_t M, size_t N>
+class MatrixFloat : public Matrix<float, M, N> {
+public:
+    constexpr MatrixFloat()
+        : Matrix<float, M, N>()
+    {}
+
+    constexpr MatrixFloat(const std::array<float, M*N> list)
+        : Matrix<float, M, N>(list)
+    {}
+
+    friend constexpr bool operator==(const MatrixFloat& m1, const MatrixFloat& m2) {
+        for (int i = 0; i < M*N; ++i)
+            if (abs(m1.entries_[i] - m2.entries_[i]) > EPSILON)
+                return false;
+        return true;
+    }
+
+    friend constexpr bool operator!=(const MatrixFloat& m1, const MatrixFloat& m2) {
+        for (int i = 0; i < M*N; ++i)
+            if (abs(m1.entries_[i] - m2.entries_[i]) > EPSILON)
+                return true;
+        return false;
+    }
+};
+
+// Pseudo partial template specialization for doubles
+
+
 
 #endif
