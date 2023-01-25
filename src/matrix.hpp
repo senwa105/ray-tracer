@@ -88,8 +88,14 @@ public:
         return new_entries;
     }
 
-    // // matrix subtraction
-    // friend Matrix<T, M, N> operator-(const Matrix& m1, const Matrix& m2);
+    // matrix subtraction
+    friend Matrix<T, M, N> operator-(const Matrix& m1, const Matrix& m2) {
+        std::array new_entries = m1.entries_;
+        for (int i = 0; i < M*N; ++i)
+            new_entries[i] -= m2.entries_[i];
+        return new_entries;
+    }
+
     // // matrix multiplication
     // template <int O>
     // friend Matrix<T, M, O> operator*(const Matrix<T, M, N>& m1, const Matrix<T, N, O>& m2);
