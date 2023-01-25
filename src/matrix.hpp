@@ -3,12 +3,14 @@
 
 #include <array>
 #include <iostream>
+#include <cmath>
 
 constexpr double EPSILON = 0.00001;     // allowed error for floating point comparison
 
 template <typename T, size_t M, size_t N> class Matrix;
 template <size_t M, size_t N> class MatrixFloat;
 template <size_t M, size_t N> class MatrixDouble;
+template <typename T, size_t D> class Vector;
 
 // typedefs for common matrices
 typedef Matrix<int, 2, 2> Matrix2i;
@@ -96,9 +98,11 @@ public:
         return new_entries;
     }
 
-    // // matrix multiplication
+    // matrix multiplication
     // template <int O>
-    // friend Matrix<T, M, O> operator*(const Matrix<T, M, N>& m1, const Matrix<T, N, O>& m2);
+    // friend Matrix<T, M, O> operator*(const Matrix<T, M, N>& m1, const Matrix<T, N, O>& m2) {
+
+    // }
 
     // negation
     Matrix<T, M, N> operator-() const {
@@ -183,6 +187,32 @@ public:
             if (abs(m1.entries_[i] - m2.entries_[i]) > EPSILON)
                 return true;
         return false;
+    }
+};
+
+template <typename T, size_t D>
+class Vector : public Matrix<T, D, 1> {
+public:
+    constexpr Vector()
+        : Matrix<T, D, 1>()
+    {}
+
+    constexpr Vector(const std::array<T, D> list)
+        : Matrix<T, D, 1>(list)
+    {}
+
+    constexpr T Norm() {
+        int sum = 0;
+        for (T e : Matrix<T, D, 1>::entries_)
+            sum += e * e;
+        return sqrt(sum);
+    }
+
+    friend constexpr T DotProduct(const Vector& v1, const Vector& v2) {
+        int dot = 0;
+        for (int i = 0; i < D; ++i)
+            dot += v1.entries_[i] * v2.entries_[i];
+        return dot;
     }
 };
 
