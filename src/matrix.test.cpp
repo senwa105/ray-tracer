@@ -88,3 +88,15 @@ TEST(MatrixTest, MatrixAddition) {
     Matrix2f f({2.5f, 2.5f, 2.5f, 2.5f});
     EXPECT_EQ(d + e, f);
 }
+
+TEST(MatrixTest, MatrixSubtraction) {
+    Matrix2i a({1, 2, 3, 4});
+    Matrix2i b({1, 1, 1, 1});
+    Matrix2i c({0, 1, 2, 3});
+    EXPECT_EQ(a - b, c);
+
+    Matrix2f d({1, 1, 1, 1});
+    Matrix2f e({1.5f, 1.5f, 1.5f, 1.5f});
+    Matrix2f f({-0.5f, -0.5f, -0.5f, -0.5f});
+    EXPECT_EQ(d - e, f);
+}
