@@ -76,3 +76,15 @@ TEST(MatrixTest, Negation) {
     Matrix2i b({-1, -2, -3, -4});
     EXPECT_EQ(-a, b);
 }
+
+TEST(MatrixTest, MatrixAddition) {
+    Matrix2i a({1, 2, 3, 4});
+    Matrix2i b({1, 1, 1, 1});
+    Matrix2i c({2, 3, 4, 5});
+    EXPECT_EQ(a + b, c);
+
+    Matrix2f d({1, 1, 1, 1});
+    Matrix2f e({1.5f, 1.5f, 1.5f, 1.5f});
+    Matrix2f f({2.5f, 2.5f, 2.5f, 2.5f});
+    EXPECT_EQ(d + e, f);
+}
