@@ -41,8 +41,8 @@ public:
     size_t GetColCount() const { return N; }
 
     // use operator() as the subscript operator
-    T& operator()(size_t row, size_t col)             { return entries_[row*M + col]; }
-    const T& operator()(size_t row, size_t col) const { return entries_[row*M + col]; }
+    T& operator()(size_t row, size_t col)             { return entries_[row*N + col]; }
+    const T& operator()(size_t row, size_t col) const { return entries_[row*N + col]; }
 
     // scalar addition
     friend constexpr Matrix operator+(const Matrix& m, const T& s) {
@@ -99,9 +99,16 @@ public:
     }
 
     // matrix multiplication
-    // template <int O>
+    // template <size_t O>
     // friend Matrix<T, M, O> operator*(const Matrix<T, M, N>& m1, const Matrix<T, N, O>& m2) {
-
+    //     Matrix<T, M, O> output;
+    //     for (int row = 0; row < M; ++row) {
+    //         for (int col = 0; col < N; ++col) {
+    //             for (int i = 0; i < N; ++i)
+    //                 output(row, col) += m1(row, i) * m2(i, col);
+    //         }
+    //     }
+    //     return output;
     // }
 
     // negation
