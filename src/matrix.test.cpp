@@ -16,11 +16,13 @@ TEST(MatrixTest, GetColCount) {
 }
 
 TEST(MatrixTest, SubscriptOperator) {
-    Matrix2i a({1, 2, 3, 4});
-    EXPECT_EQ(1, a(0,0));
-    EXPECT_EQ(2, a(0,1));
-    EXPECT_EQ(3, a(1,0));
-    EXPECT_EQ(4, a(1,1));
+    Matrix<int, 2, 3> a({1, 2, 3, 4, 5, 6});
+    EXPECT_EQ(1, a(0, 0));
+    EXPECT_EQ(2, a(0, 1));
+    EXPECT_EQ(3, a(0, 2));
+    EXPECT_EQ(4, a(1, 0));
+    EXPECT_EQ(5, a(1, 1));
+    EXPECT_EQ(6, a(1, 2));
 }
 
 TEST(MatrixTest, FloatComparison) {
