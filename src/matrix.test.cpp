@@ -102,3 +102,19 @@ TEST(MatrixTest, MatrixSubtraction) {
     Matrix2f f({-0.5f, -0.5f, -0.5f, -0.5f});
     EXPECT_EQ(d - e, f);
 }
+
+TEST(MatrixTest, MatrixMultiplication) {
+    Matrix4f a({1, 2, 3, 4, 
+                5, 6, 7, 8, 
+                9, 8, 7, 6, 
+                5, 4, 3, 2,});
+    Matrix4f b({-2, 1, 2,  3, 
+                 3, 2, 1, -1, 
+                 4, 3, 6,  5, 
+                 1, 2, 7,  8,});
+    Matrix4f c({20, 22,  50,  48, 
+                44, 54, 114, 108, 
+                40, 58, 110, 102, 
+                16, 26,  46,  42,});
+    EXPECT_EQ(a * b, c);
+}
