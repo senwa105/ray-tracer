@@ -99,17 +99,21 @@ public:
     }
 
     // matrix multiplication
-    // template <size_t O>
-    // friend Matrix<T, M, O> operator*(const Matrix<T, M, N>& m1, const Matrix<T, N, O>& m2) {
-    //     Matrix<T, M, O> output;
-    //     for (int row = 0; row < M; ++row) {
-    //         for (int col = 0; col < N; ++col) {
-    //             for (int i = 0; i < N; ++i)
-    //                 output(row, col) += m1(row, i) * m2(i, col);
-    //         }
-    //     }
-    //     return output;
-    // }
+    template <size_t O>
+    friend Matrix<T, M, O> operator*(const Matrix<T, M, N>& m1, const Matrix<T, N, O>& m2) {
+        Matrix<T, M, O> output;
+        for (size_t row = 0; row < M; ++row) {
+            for (size_t col = 0; col < O; ++col) {
+                for (size_t i = 0; i < N; ++i) {
+                    auto mm = m1(row, i);
+                    auto nn = m2(i, col);
+                    output(row, col) += m1(row, i) * m2(i, col);
+                }
+            }
+        }
+
+        return output;
+    }
 
     // negation
     Matrix<T, M, N> operator-() const {
