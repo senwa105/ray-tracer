@@ -227,7 +227,7 @@ public:
     }
 
     friend constexpr Matrix<T, 3, 1> Cross(const Matrix& v1, const Matrix& v2) {
-        static_assert(N == 1 && "Cross is only defeind for vectors; number of cols must be one");
+        static_assert(N == 1 && "Cross is only defined for vectors; number of cols must be one");
         static_assert(M == 3 && "Cross is only defined for 3-dimensional vectors");
 
         return Matrix({v1.Y() * v2.Z() - v1.Z() * v2.Y(), 
