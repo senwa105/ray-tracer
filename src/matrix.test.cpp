@@ -131,3 +131,17 @@ TEST(MatrixTest, VectorNorm) {
     v = Vector3f({-1, -2, -3});
     EXPECT_FLOAT_EQ(v.Norm(), sqrt(14));
 }
+
+TEST(MatrixTest, VectorNormalization) {
+    Vector3f v({4, 0, 0});
+    Vector3f w({1, 0, 0});
+    auto norm = Normalize(v);
+    EXPECT_EQ(norm, w);
+    EXPECT_FLOAT_EQ(norm.Norm(), 1);
+
+    v = Vector3f({1, 2, 3});
+    w = Vector3f({1, 2, 3}) * (1 / sqrt(14));
+    norm = Normalize(v);
+    EXPECT_EQ(norm, w);
+    EXPECT_FLOAT_EQ(norm.Norm(), 1);
+}
