@@ -157,27 +157,47 @@ public:
 
     // Vector Functions
 
-    constexpr T& X() {
+    T& X() {
         static_assert(M >= 1 && N == 1 && "Must be a vector in at least 1 dimension");
         return entries_[0];
     }
 
-    constexpr T& Y() {
+    const T& X() const {
+        static_assert(M >= 1 && N == 1 && "Must be a vector in at least 1 dimension");
+        return entries_[0];
+    }
+
+    T& Y() {
         static_assert(M >= 2 && N == 1 && "Must be a vector in at least 2 dimensions");
         return entries_[1];
     }
 
-    constexpr T& Z() {
+    const T& Y() const {
+        static_assert(M >= 2 && N == 1 && "Must be a vector in at least 2 dimensions");
+        return entries_[1];
+    }
+
+    T& Z() {
         static_assert(M >= 3 && N == 1 && "Must be a vector in at least 3 dimensions");
         return entries_[2];
     }
 
-    constexpr T& W() {
+    const T& Z() const {
+        static_assert(M >= 3 && N == 1 && "Must be a vector in at least 3 dimensions");
+        return entries_[2];
+    }
+
+    T& W() {
         static_assert(M >= 4 && N == 1 && "Must be a vector in at least 4 dimension");
         return entries_[3];
     }
 
-    constexpr T Norm() {
+    const T& W() const {
+        static_assert(M >= 4 && N == 1 && "Must be a vector in at least 4 dimension");
+        return entries_[3];
+    }
+
+    const T Norm() const {
         static_assert(N == 1 && "Norm is only defined for vectors; number of cols must be one");
 
         T sum = 0;
@@ -206,11 +226,13 @@ public:
         return dot;
     }
 
-    // friend constexpr Matrix Cross(const Matrix& v1, const Matrix&2 v2) {
+    // friend constexpr Matrix<T, 3, 1> Cross(const Matrix& v1, const Matrix& v2) {
     //     static_assert(N == 1 && "Cross is only defeind for vectors; number of cols must be one");
     //     static_assert(M == 3 && "Cross is only defined for 3-dimensional vectors");
 
-
+    //     return Matrix({v1.Y() * v2.Z() - v1.Z() * v2.Y(), 
+    //                    v1.Z() * v2.X() - v1.X() * v2.Z(), 
+    //                    v1.X() * v2.Y() - v1.Y() * v2.X()});
     // }
 };
 
