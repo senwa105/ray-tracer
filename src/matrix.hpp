@@ -164,6 +164,17 @@ public:
         return sqrt(sum);
     }
 
+    // friend constexpr Matrix<T, M, 1> Normalize(Matrix& v) {
+    //     static_assert(N == 1 && "Normalize is only defined for vectors; number of cols must be one");
+
+    //     T norm = v.Norm();
+    //     std::array new_entries = v.entries_;
+    //     for (T& e : new_entries)
+    //         e /= norm;
+        
+    //     return Matrix(new_entries);
+    // } 
+
     friend constexpr T DotProduct(const Matrix& v1, const Matrix& v2) {
         static_assert(N == 1 && "Dot Product is only defined for vectors; number of cols must be one");
 
@@ -185,6 +196,8 @@ public:
     constexpr MatrixFloat(const std::array<float, M*N> list)
         : Matrix<float, M, N>(list)
     {}
+
+    using Matrix<float, M, N>::operator=;
 
     friend constexpr bool operator==(const MatrixFloat& m1, const MatrixFloat& m2) {
         for (int i = 0; i < M*N; ++i)
