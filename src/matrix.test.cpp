@@ -158,4 +158,8 @@ TEST(MatrixTest, VectorDotProduct) {
     Vector3f a({1, 2, 3});
     Vector3f b({2, 3, 4});
     EXPECT_FLOAT_EQ(Dot(a, b),  20);
+
+    a = Vector3f({-0.5, 2.5, 4.0});
+    b = Vector3f({1.5, -3.0, -2.5});
+    EXPECT_FLOAT_EQ(Dot(a, b), -18.25);
 }
