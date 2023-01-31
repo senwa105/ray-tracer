@@ -23,6 +23,7 @@ typedef MatrixDouble<2, 2> Materix2d;
 typedef MatrixDouble<3, 3> Materix3d;
 typedef MatrixDouble<4, 4> Materix4d;
 
+
 template <typename T, size_t M, size_t N>
 class Matrix {
 protected:
@@ -145,6 +146,24 @@ public:
 
         return os;
     }
+
+    constexpr T Norm() {
+        static_assert(N == 1 && "Norm is only defined for vectors; number of cols must be one");
+
+        int sum = 0;
+        for (T e : entries_)
+            sum += e * e;
+        return sqrt(sum);
+    }
+
+    friend constexpr T DotProduct(const Matrix& v1, const Matrix& v2) {
+        static_assert(N == 1 && "Dot Product is only defined for vectors; number of cols must be one");
+
+        int dot = 0;
+        for (int i = 0; i < M; ++i)
+            dot += v1.entries_[i] * v2.entries_[i];
+        return dot;
+    }
 };
 
 // Pseudo partial template specialization for floats
@@ -201,30 +220,30 @@ public:
     }
 };
 
-template <typename T, size_t D>
-class Vector : public Matrix<T, D, 1> {
-public:
-    constexpr Vector()
-        : Matrix<T, D, 1>()
-    {}
+// template <typename T, size_t D>
+// class Vector : public Matrix<T, D, 1> {
+// public:
+//     constexpr Vector()
+//         : Matrix<T, D, 1>()
+//     {}
 
-    constexpr Vector(const std::array<T, D> list)
-        : Matrix<T, D, 1>(list)
-    {}
+//     constexpr Vector(const std::array<T, D> list)
+//         : Matrix<T, D, 1>(list)
+//     {}
 
-    constexpr T Norm() {
-        int sum = 0;
-        for (T e : Matrix<T, D, 1>::entries_)
-            sum += e * e;
-        return sqrt(sum);
-    }
+//     constexpr T Norm() {
+//         int sum = 0;
+//         for (T e : Matrix<T, D, 1>::entries_)
+//             sum += e * e;
+//         return sqrt(sum);
+//     }
 
-    friend constexpr T DotProduct(const Vector& v1, const Vector& v2) {
-        int dot = 0;
-        for (int i = 0; i < D; ++i)
-            dot += v1.entries_[i] * v2.entries_[i];
-        return dot;
-    }
-};
+//     friend constexpr T DotProduct(const Vector& v1, const Vector& v2) {
+//         int dot = 0;
+//         for (int i = 0; i < D; ++i)
+//             dot += v1.entries_[i] * v2.entries_[i];
+//         return dot;
+//     }
+// };
 
 #endif
