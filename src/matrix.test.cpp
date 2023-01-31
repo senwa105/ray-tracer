@@ -119,6 +119,14 @@ TEST(MatrixTest, MatrixMultiplication) {
     EXPECT_EQ(a * b, c);
 }
 
+TEST(MatrixTest, VectorComponentAccess) {
+    Vector4f v({1, 2, 3, 4});
+    EXPECT_FLOAT_EQ(v.X(), 1);
+    EXPECT_FLOAT_EQ(v.Y(), 2);
+    EXPECT_FLOAT_EQ(v.Z(), 3);
+    EXPECT_FLOAT_EQ(v.W(), 4);
+}
+
 TEST(MatrixTest, VectorNorm) {
     Vector3f v({1, 0, 0});
     EXPECT_EQ(v.Norm(), 1);
