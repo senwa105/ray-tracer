@@ -175,7 +175,7 @@ public:
         return Matrix(new_entries);
     } 
 
-    friend constexpr T DotProduct(const Matrix& v1, const Matrix& v2) {
+    friend constexpr T Dot(const Matrix& v1, const Matrix& v2) {
         static_assert(N == 1 && "Dot Product is only defined for vectors; number of cols must be one");
 
         int dot = 0;
