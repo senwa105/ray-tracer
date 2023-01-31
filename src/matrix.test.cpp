@@ -118,3 +118,16 @@ TEST(MatrixTest, MatrixMultiplication) {
                 16, 26,  46,  42,});
     EXPECT_EQ(a * b, c);
 }
+
+TEST(MatrixTest, VectorNorm) {
+    Vector3f v({1, 0, 0});
+    EXPECT_EQ(v.Norm(), 1);
+    v = Vector3f({0, 1, 0});
+    EXPECT_EQ(v.Norm(), 1);
+    v = Vector3f({0, 0, 1});
+    EXPECT_EQ(v.Norm(), 1);
+    v = Vector3f({1, 2, 3});
+    EXPECT_FLOAT_EQ(v.Norm(), sqrt(14));
+    v = Vector3f({-1, -2, -3});
+    EXPECT_FLOAT_EQ(v.Norm(), sqrt(14));
+}
