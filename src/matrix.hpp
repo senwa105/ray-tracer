@@ -22,7 +22,15 @@ typedef MatrixFloat<4, 4> Matrix4f;
 typedef MatrixDouble<2, 2> Materix2d;
 typedef MatrixDouble<3, 3> Materix3d;
 typedef MatrixDouble<4, 4> Materix4d;
-
+typedef Matrix<int, 2, 1> Vector2i;
+typedef Matrix<int, 3, 1> Vector3i;
+typedef Matrix<int, 4, 1> Vector4i;
+typedef MatrixFloat<2, 1> Vector2f;
+typedef MatrixFloat<3, 1> Vector3f;
+typedef MatrixFloat<4, 1> Vector4f;
+typedef MatrixDouble<2, 1> Vector2d;
+typedef MatrixDouble<3, 1> Vector3d;
+typedef MatrixDouble<4, 1> Vector4d;
 
 template <typename T, size_t M, size_t N>
 class Matrix {
