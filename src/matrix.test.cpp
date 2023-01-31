@@ -155,11 +155,25 @@ TEST(MatrixTest, VectorNormalization) {
 }
 
 TEST(MatrixTest, VectorDotProduct) {
-    Vector3f a({1, 2, 3});
-    Vector3f b({2, 3, 4});
-    EXPECT_FLOAT_EQ(Dot(a, b),  20);
+    Vector3i a({1, 2, 3});
+    Vector3i b({2, 3, 4});
+    EXPECT_EQ(Dot(a, b),  20);
 
-    a = Vector3f({-0.5, 2.5, 4.0});
-    b = Vector3f({1.5, -3.0, -2.5});
-    EXPECT_FLOAT_EQ(Dot(a, b), -18.25);
+    Vector3f c({-0.5, 2.5, 4.0});
+    Vector3f d({1.5, -3.0, -2.5});
+    EXPECT_FLOAT_EQ(Dot(c, d), -18.25);
+}
+
+TEST(MatrixTest, VectorCrossProduct) {
+    Vector3i a({1, 2, 3});
+    Vector3i b({2, 3, 4});
+    Vector3i c({-1, 2, -1});
+    EXPECT_EQ(Cross(a, b),  c);
+    EXPECT_EQ(Cross(b, a), -c);
+
+    Vector3f d({-0.5, 2.5, 4.0});
+    Vector3f e({1.5, -3.0, -2.5});
+    Vector3f f({5.75, 4.75, -2.25});
+    EXPECT_EQ(Cross(d, e),  f);
+    EXPECT_EQ(Cross(e, d), -f);
 }
