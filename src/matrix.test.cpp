@@ -145,3 +145,9 @@ TEST(MatrixTest, VectorNormalization) {
     EXPECT_EQ(norm, w);
     EXPECT_FLOAT_EQ(norm.Norm(), 1);
 }
+
+TEST(MatrixTest, VectorDotProduct) {
+    Vector3f a({1, 2, 3});
+    Vector3f b({2, 3, 4});
+    EXPECT_FLOAT_EQ(Dot(a, b),  20);
+}
