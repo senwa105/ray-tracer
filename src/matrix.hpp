@@ -155,6 +155,28 @@ public:
         return os;
     }
 
+    // Vector Functions
+
+    constexpr T& X() {
+        static_assert(M >= 1 && N == 1 && "Must be a vector in at least 1 dimension");
+        return entries_[0];
+    }
+
+    constexpr T& Y() {
+        static_assert(M >= 2 && N == 1 && "Must be a vector in at least 2 dimensions");
+        return entries_[1];
+    }
+
+    constexpr T& Z() {
+        static_assert(M >= 3 && N == 1 && "Must be a vector in at least 3 dimensions");
+        return entries_[2];
+    }
+
+    constexpr T& W() {
+        static_assert(M >= 4 && N == 1 && "Must be a vector in at least 4 dimension");
+        return entries_[3];
+    }
+
     constexpr T Norm() {
         static_assert(N == 1 && "Norm is only defined for vectors; number of cols must be one");
 
@@ -176,13 +198,20 @@ public:
     } 
 
     friend constexpr T Dot(const Matrix& v1, const Matrix& v2) {
-        static_assert(N == 1 && "Dot Product is only defined for vectors; number of cols must be one");
+        static_assert(N == 1 && "Dot is only defined for vectors; number of cols must be one");
 
-        int dot = 0;
+        T dot = 0;
         for (int i = 0; i < M; ++i)
             dot += v1.entries_[i] * v2.entries_[i];
         return dot;
     }
+
+    // friend constexpr Matrix Cross(const Matrix& v1, const Matrix&2 v2) {
+    //     static_assert(N == 1 && "Cross is only defeind for vectors; number of cols must be one");
+    //     static_assert(M == 3 && "Cross is only defined for 3-dimensional vectors");
+
+
+    // }
 };
 
 // Pseudo partial template specialization for floats
