@@ -19,9 +19,9 @@ typedef Matrix<int, 4, 4> Matrix4i;
 typedef MatrixFloat<2, 2> Matrix2f;
 typedef MatrixFloat<3, 3> Matrix3f;
 typedef MatrixFloat<4, 4> Matrix4f;
-typedef MatrixDouble<2, 2> Materix2d;
-typedef MatrixDouble<3, 3> Materix3d;
-typedef MatrixDouble<4, 4> Materix4d;
+typedef MatrixDouble<2, 2> Matrix2d;
+typedef MatrixDouble<3, 3> Matrix3d;
+typedef MatrixDouble<4, 4> Matrix4d;
 typedef Matrix<int, 2, 1> Vector2i;
 typedef Matrix<int, 3, 1> Vector3i;
 typedef Matrix<int, 4, 1> Vector4i;
@@ -40,10 +40,21 @@ protected:
 public:
     // construct zero matrix by default
     constexpr Matrix() = default;
+
     // construct matrix from array literal
     constexpr Matrix(const std::array<T, M*N> list) {
-        for (int i = 0; i < M*N; ++i)
+        for (size_t i = 0; i < M*N; ++i)
             entries_[i] = list[i];
+    }
+
+    // construct Identity matrix
+    static constexpr Matrix Identity() {
+        static_assert(M == N, "Identity matrix can only be constructed for square matrices");
+
+        std::array<T, M*N> entries{};
+        for (size_t i = 0; i < N; ++i)
+            entries[i*N + i] = 1;
+        return Matrix(entries);
     }
 
     size_t GetRowCount() const { return M; }
@@ -158,47 +169,47 @@ public:
     // Vector Functions
 
     T& X() {
-        static_assert(M >= 1 && N == 1 && "Must be a vector in at least 1 dimension");
+        static_assert(M >= 1 && N == 1, "Must be a vector in at least 1 dimension");
         return entries_[0];
     }
 
     const T& X() const {
-        static_assert(M >= 1 && N == 1 && "Must be a vector in at least 1 dimension");
+        static_assert(M >= 1 && N == 1, "Must be a vector in at least 1 dimension");
         return entries_[0];
     }
 
     T& Y() {
-        static_assert(M >= 2 && N == 1 && "Must be a vector in at least 2 dimensions");
+        static_assert(M >= 2 && N == 1, "Must be a vector in at least 2 dimensions");
         return entries_[1];
     }
 
     const T& Y() const {
-        static_assert(M >= 2 && N == 1 && "Must be a vector in at least 2 dimensions");
+        static_assert(M >= 2 && N == 1, "Must be a vector in at least 2 dimensions");
         return entries_[1];
     }
 
     T& Z() {
-        static_assert(M >= 3 && N == 1 && "Must be a vector in at least 3 dimensions");
+        static_assert(M >= 3 && N == 1, "Must be a vector in at least 3 dimensions");
         return entries_[2];
     }
 
     const T& Z() const {
-        static_assert(M >= 3 && N == 1 && "Must be a vector in at least 3 dimensions");
+        static_assert(M >= 3 && N == 1, "Must be a vector in at least 3 dimensions");
         return entries_[2];
     }
 
     T& W() {
-        static_assert(M >= 4 && N == 1 && "Must be a vector in at least 4 dimension");
+        static_assert(M >= 4 && N == 1, "Must be a vector in at least 4 dimension");
         return entries_[3];
     }
 
     const T& W() const {
-        static_assert(M >= 4 && N == 1 && "Must be a vector in at least 4 dimension");
+        static_assert(M >= 4 && N == 1, "Must be a vector in at least 4 dimension");
         return entries_[3];
     }
 
     const T Norm() const {
-        static_assert(N == 1 && "Norm is only defined for vectors; number of cols must be one");
+        static_assert(N == 1, "Norm is only defined for vectors; number of cols must be one");
 
         T sum = 0;
         for (T e : entries_)
@@ -207,7 +218,7 @@ public:
     }
 
     friend constexpr Matrix<T, M, 1> Normalize(Matrix& v) {
-        static_assert(N == 1 && "Normalize is only defined for vectors; number of cols must be one");
+        static_assert(N == 1, "Normalize is only defined for vectors; number of cols must be one");
 
         T norm = v.Norm();
         std::array new_entries = v.entries_;
@@ -218,7 +229,7 @@ public:
     } 
 
     friend constexpr T Dot(const Matrix& v1, const Matrix& v2) {
-        static_assert(N == 1 && "Dot is only defined for vectors; number of cols must be one");
+        static_assert(N == 1, "Dot is only defined for vectors; number of cols must be one");
 
         T dot = 0;
         for (int i = 0; i < M; ++i)
@@ -227,8 +238,8 @@ public:
     }
 
     friend constexpr Matrix<T, 3, 1> Cross(const Matrix& v1, const Matrix& v2) {
-        static_assert(N == 1 && "Cross is only defined for vectors; number of cols must be one");
-        static_assert(M == 3 && "Cross is only defined for 3-dimensional vectors");
+        static_assert(N == 1, "Cross is only defined for vectors; number of cols must be one");
+        static_assert(M == 3, "Cross is only defined for 3-dimensional vectors");
 
         return Matrix({v1.Y() * v2.Z() - v1.Z() * v2.Y(), 
                        v1.Z() * v2.X() - v1.X() * v2.Z(), 
@@ -277,6 +288,8 @@ public:
         : Matrix<float, M, N>(list)
     {}
 
+    using Matrix<float, M, N>::operator=;
+
     friend constexpr bool operator==(const MatrixDouble& m1, const MatrixDouble& m2) {
         for (int i = 0; i < M*N; ++i)
             if (abs(m1.entries_[i] - m2.entries_[i]) > EPSILON)
@@ -291,31 +304,5 @@ public:
         return false;
     }
 };
-
-// template <typename T, size_t D>
-// class Vector : public Matrix<T, D, 1> {
-// public:
-//     constexpr Vector()
-//         : Matrix<T, D, 1>()
-//     {}
-
-//     constexpr Vector(const std::array<T, D> list)
-//         : Matrix<T, D, 1>(list)
-//     {}
-
-//     constexpr T Norm() {
-//         int sum = 0;
-//         for (T e : Matrix<T, D, 1>::entries_)
-//             sum += e * e;
-//         return sqrt(sum);
-//     }
-
-//     friend constexpr T DotProduct(const Vector& v1, const Vector& v2) {
-//         int dot = 0;
-//         for (int i = 0; i < D; ++i)
-//             dot += v1.entries_[i] * v2.entries_[i];
-//         return dot;
-//     }
-// };
 
 #endif
