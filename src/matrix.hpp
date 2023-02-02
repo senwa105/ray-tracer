@@ -12,7 +12,6 @@ template <typename T, size_t M, size_t N>
 requires std::integral<T> || std::floating_point<T>
 class Matrix;
 
-constexpr float EPSILON = 0.00001;     // allowed error for floating point comparison
 template <typename T, size_t M, size_t N> 
 requires std::integral<T>
 class MatrixIntegral;
