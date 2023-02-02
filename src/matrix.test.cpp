@@ -4,19 +4,19 @@
 TEST(MatrixTest, GetRowCount) {
     Matrix4f a;
     EXPECT_EQ(a.GetRowCount(), 4);
-    Matrix<int, 19, 23> b;
+    MatrixIntegral<int, 19, 23> b;
     EXPECT_EQ(b.GetRowCount(), 19);
 }
 
 TEST(MatrixTest, GetColCount) {
     Matrix4f a;
     EXPECT_EQ(a.GetColCount(), 4);
-    Matrix<int, 19, 23> b;
+    MatrixIntegral<int, 19, 23> b;
     EXPECT_EQ(b.GetColCount(), 23);
 }
 
 TEST(MatrixTest, SubscriptOperator) {
-    Matrix<int, 2, 3> a({1, 2, 3, 4, 5, 6});
+    MatrixIntegral<int, 2, 3> a({1, 2, 3, 4, 5, 6});
     EXPECT_EQ(1, a(0, 0));
     EXPECT_EQ(2, a(0, 1));
     EXPECT_EQ(3, a(0, 2));
