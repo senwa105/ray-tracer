@@ -204,3 +204,11 @@ TEST(MatrixTest, Transpose) {
     Matrix4f id = Matrix4f::Identity();
     EXPECT_EQ(Matrix4f::Transpose(id), id);
 }
+
+TEST(MatrixTest, Determinant2x2) {
+    Matrix2i a({1, 5, -3, 2});
+    EXPECT_EQ(a.Determinant(), 17);
+
+    Matrix2f b({1.5f, 2.5f, 3.5f, 4.5f});
+    EXPECT_EQ(b.Determinant(), -2.0f);
+}
