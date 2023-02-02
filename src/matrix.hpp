@@ -167,6 +167,18 @@ public:
     friend constexpr bool operator==<T, M, N>(const Matrix& m1, const Matrix& m2);
     friend constexpr bool operator!=<T, M, N>(const Matrix& m1, const Matrix& m2);
 
+    // Square Matrix Functions
+    constexpr T Determinant() const {
+        static_assert(M == N, "Determinant is only defined for square matrices; number of rows and cols must be equal");
+
+        if constexpr(M == 2) {  // base case when matrix is 2x2
+            return entries_[0] * entries_[3] - entries_[1] * entries_[2];
+        }
+        else {                  // recursive case
+            return -1;
+        }
+    }
+
     // Vector Functions
 
     T& X() {
