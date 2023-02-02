@@ -6,7 +6,11 @@
 #include <cmath>
 #include <concepts>
 
-constexpr double EPSILON = 0.00001;     // allowed error for floating point comparison
+constexpr float EPSILON = 0.00001;     // allowed error for floating point comparison
+
+template <typename T, size_t M, size_t N> 
+requires std::integral<T> || std::floating_point<T>
+class Matrix;
 
 template <typename T, size_t M, size_t N> 
 requires std::integral<T>
@@ -17,18 +21,18 @@ requires std::floating_point<T>
 class MatrixFloating;
 
 // typedefs for common matrices
-typedef MatrixIntegral<int, 2, 2> Matrix2i;
-typedef MatrixIntegral<int, 3, 3> Matrix3i;
-typedef MatrixIntegral<int, 4, 4> Matrix4i;
-typedef MatrixIntegral<int, 2, 1> Vector2i;
-typedef MatrixIntegral<int, 3, 1> Vector3i;
-typedef MatrixIntegral<int, 4, 1> Vector4i;
-typedef MatrixFloating<float, 2, 2> Matrix2f;
-typedef MatrixFloating<float, 3, 3> Matrix3f;
-typedef MatrixFloating<float, 4, 4> Matrix4f;
-typedef MatrixFloating<float, 2, 1> Vector2f;
-typedef MatrixFloating<float, 3, 1> Vector3f;
-typedef MatrixFloating<float, 4, 1> Vector4f;
+typedef Matrix<int, 2, 2> Matrix2i;
+typedef Matrix<int, 3, 3> Matrix3i;
+typedef Matrix<int, 4, 4> Matrix4i;
+typedef Matrix<int, 2, 1> Vector2i;
+typedef Matrix<int, 3, 1> Vector3i;
+typedef Matrix<int, 4, 1> Vector4i;
+typedef Matrix<float, 2, 2> Matrix2f;
+typedef Matrix<float, 3, 3> Matrix3f;
+typedef Matrix<float, 4, 4> Matrix4f;
+typedef Matrix<float, 2, 1> Vector2f;
+typedef Matrix<float, 3, 1> Vector3f;
+typedef Matrix<float, 4, 1> Vector4f;
 
 template <typename T, size_t M, size_t N>
 requires std::integral<T> || std::floating_point<T>
@@ -36,6 +40,7 @@ class Matrix {
 protected:
     std::array<T, M*N> entries_{};
 
+public:
     // construct zero matrix by default
     constexpr Matrix() = default;
 
@@ -55,7 +60,6 @@ protected:
         return Matrix(entries);
     }
 
-public:
     size_t GetRowCount() const { return M; }
     size_t GetColCount() const { return N; }
 
@@ -151,13 +155,8 @@ public:
     }
 
     // comparison
-    // template <typename BaseOrIntegral>
-    // requires std::same_as<BaseOrIntegral, Matrix<T, M, N>> || std::same_as<BaseOrIntegral, MatrixIntegral<T, M, N>>
-    // friend constexpr bool operator==(const BaseOrIntegral& m1, const BaseOrIntegral& m2);
-
-    // template <typename BaseOrFloating>
-    // requires std::same_as<BaseOrFloating, Matrix<T, M, N>> || std::same_as<BaseOrFloating, MatrixFloating<T, M, N>>
-    // friend constexpr bool operator==(const BaseOrFloating& m1, const BaseOrFloating& m2);
+    friend constexpr bool operator==<T, M, N>(const Matrix& m1, const Matrix& m2);
+    friend constexpr bool operator!=<T, M, N>(const Matrix& m1, const Matrix& m2);
 
     // Vector Functions
 
@@ -240,81 +239,36 @@ public:
     }
 };
 
-template <typename T, size_t M, size_t N>
-requires std::integral<T>
-class MatrixIntegral : public Matrix<T, M, N> {
-public:
-    constexpr MatrixIntegral()
-        : Matrix<T, M, N>()
-    {}
+template <std::integral T, size_t M, size_t N>
+constexpr bool operator==(const Matrix<T, M, N>& m1, const Matrix<T, M, N>& m2) {
+    for (int i = 0; i < M*N; ++i)
+        if (m1.entries_[i] != m2.entries_[i])
+            return false;
+    return true;
+}
 
-    constexpr MatrixIntegral(const std::array<T, M*N> list)
-        : Matrix<T, M, N>(list)
-    {}
+template <std::integral T, size_t M, size_t N>
+constexpr bool operator!=(const Matrix<T, M, N>& m1, const Matrix<T, M, N>& m2) {
+    for (int i = 0; i < M*N; ++i)
+        if (m1.entries_[i] != m2.entries_[i])
+            return true;
+    return false;
+}
 
-    static constexpr MatrixIntegral Identity() {
-        static_assert(M == N, "Identity matrix can only be constructed for square matrices");
-
-        std::array<T, M*N> entries{};
-        for (size_t i = 0; i < N; ++i)
-            entries[i*N + i] = 1;
-        return Matrix(entries);
-    }
-
-    using Matrix<T, M, N>::operator=;
-
-    friend constexpr bool operator==(const MatrixIntegral& m1, const MatrixIntegral& m2) {
-        for (int i = 0; i < M*N; ++i)
-            if (m1.entries_[i] != m2.entries_[i])
-                return false;
-        return true;
-    }
-
-    friend constexpr bool operator!=(const MatrixIntegral& m1, const MatrixIntegral& m2) {
-        for (int i = 0; i < M*N; ++i)
-            if (m1.entries_[i] != m2.entries_[i])
-                return true;
-        return false;
-    }
-
-};
-
-template <typename T, size_t M, size_t N>
-requires std::floating_point<T>
-class MatrixFloating : public Matrix<T, M, N> {
-public:
-    constexpr MatrixFloating()
-        : Matrix<T, M, N>()
-    {}
-
-    constexpr MatrixFloating(const std::array<T, M*N> list)
-        : Matrix<T, M, N>(list)
-    {}
-
-    static constexpr MatrixFloating Identity() {
-        static_assert(M == N, "Identity matrix can only be constructed for square matrices");
-
-        std::array<T, M*N> entries{};
-        for (size_t i = 0; i < N; ++i)
-            entries[i*N + i] = 1;
-        return Matrix(entries);
-    }
-
-    using Matrix<T, M, N>::operator=;
-
-    friend constexpr bool operator==(const MatrixFloating& m1, const MatrixFloating& m2) {
+template <std::floating_point T, size_t M, size_t N>
+constexpr bool operator==(const Matrix<T, M, N>& m1, const Matrix<T, M, N>& m2) {
         for (size_t i = 0; i < M*N; ++i)
             if (std::abs(m1.entries_[i] - m2.entries_[i]) > EPSILON)
                 return false;
         return true;
-    }
+}
 
-    friend constexpr bool operator!=(const MatrixFloating& m1, const MatrixFloating& m2) {
+template <std::floating_point T, size_t M, size_t N>
+constexpr bool operator!=(const Matrix<T, M, N>& m1, const Matrix<T, M, N>& m2) {
         for (size_t i = 0; i < M*N; ++i)
             if (std::abs(m1.entries_[i] - m2.entries_[i]) > EPSILON)
                 return true;
         return false;
-    }
-};
+}
 
 #endif
