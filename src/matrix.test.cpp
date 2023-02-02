@@ -35,9 +35,9 @@ TEST(MatrixTest, FloatComparison) {
 }
 
 TEST(MatrixTest, DoubleComparison) {
-    Matrix2f a({1.0f, 2.0f, 3.0f, 4.0f});
-    Matrix2f b({1.1f, 2.2f, 3.3f, 4.4f});
-    Matrix2f c({1.000001f, 2.000002f, 3.000003f, 4.000004f});
+    Matrix<double, 2, 2> a({1.0f, 2.0f, 3.0f, 4.0f});
+    Matrix<double, 2, 2> b({1.1f, 2.2f, 3.3f, 4.4f});
+    Matrix<double, 2, 2> c({1.000001f, 2.000002f, 3.000003f, 4.000004f});
 
     EXPECT_FALSE(a == b);
     EXPECT_TRUE(a == c);
