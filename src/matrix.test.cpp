@@ -120,7 +120,14 @@ TEST(MatrixTest, MatrixMultiplication) {
 }
 
 TEST(MatrixTest, IdentityMatrix) {
-    
+    Matrix4i a({0, 1, 2,  4,
+                1, 2, 4,  8,
+                2, 4, 8,  16,
+                4, 8, 16, 32});
+    EXPECT_EQ(Matrix4i::Identity() * a, a);
+
+    Vector4f b({1.5f, 2.5f, 3.5f, 4.5f});
+    EXPECT_EQ(Matrix4f::Identity() * b, b);
 }
 
 TEST(MatrixTest, VectorComponentAccess) {
