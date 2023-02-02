@@ -151,13 +151,13 @@ public:
     }
 
     // comparison
-    template <typename BaseOrIntegral>
-    requires std::same_as<BaseOrIntegral, Matrix<T, M, N>> || std::same_as<BaseOrIntegral, MatrixIntegral<T, M, N>>
-    friend constexpr bool operator==(const BaseOrIntegral& m1, const BaseOrIntegral& m2);
+    // template <typename BaseOrIntegral>
+    // requires std::same_as<BaseOrIntegral, Matrix<T, M, N>> || std::same_as<BaseOrIntegral, MatrixIntegral<T, M, N>>
+    // friend constexpr bool operator==(const BaseOrIntegral& m1, const BaseOrIntegral& m2);
 
-    template <typename BaseOrFloating>
-    requires std::same_as<BaseOrFloating, Matrix<T, M, N>> || std::same_as<BaseOrFloating, MatrixFloating<T, M, N>>
-    friend constexpr bool operator==(const BaseOrFloating& m1, const BaseOrFloating& m2);
+    // template <typename BaseOrFloating>
+    // requires std::same_as<BaseOrFloating, Matrix<T, M, N>> || std::same_as<BaseOrFloating, MatrixFloating<T, M, N>>
+    // friend constexpr bool operator==(const BaseOrFloating& m1, const BaseOrFloating& m2);
 
     // Vector Functions
 
@@ -263,19 +263,14 @@ public:
 
     using Matrix<T, M, N>::operator=;
 
-
-    template <typename BaseOrIntegral>
-    requires std::same_as<BaseOrIntegral, Matrix<T, M, N>> || std::same_as<BaseOrIntegral, MatrixIntegral<T, M, N>>
-    friend constexpr bool operator==(const MatrixIntegral<T, M, N>& m1, const MatrixIntegral<T, M, N>& m2) {
+    friend constexpr bool operator==(const MatrixIntegral& m1, const MatrixIntegral& m2) {
         for (int i = 0; i < M*N; ++i)
             if (m1.entries_[i] != m2.entries_[i])
                 return false;
         return true;
     }
 
-    template <typename BaseOrIntegral>
-    requires std::same_as<BaseOrIntegral, Matrix<T, M, N>> || std::same_as<BaseOrIntegral, MatrixIntegral<T, M, N>>
-    friend constexpr bool operator!=(const MatrixIntegral<T, M, N>& m1, const MatrixIntegral<T, M, N>& m2) {
+    friend constexpr bool operator!=(const MatrixIntegral& m1, const MatrixIntegral& m2) {
         for (int i = 0; i < M*N; ++i)
             if (m1.entries_[i] != m2.entries_[i])
                 return true;
@@ -307,20 +302,16 @@ public:
 
     using Matrix<T, M, N>::operator=;
 
-    template <typename BaseOrFloating>
-    requires std::same_as<BaseOrFloating, Matrix<T, M, N>> || std::same_as<BaseOrFloating, MatrixFloating<T, M, N>>
-    friend constexpr bool operator==(const BaseOrFloating& m1, const BaseOrFloating& m2) {
+    friend constexpr bool operator==(const MatrixFloating& m1, const MatrixFloating& m2) {
         for (size_t i = 0; i < M*N; ++i)
-            if (abs(m1.entries_[i] - m2.entries_[i]) > EPSILON)
+            if (std::abs(m1.entries_[i] - m2.entries_[i]) > EPSILON)
                 return false;
         return true;
     }
 
-    template <typename BaseOrFloating>
-    requires std::same_as<BaseOrFloating, Matrix<T, M, N>> || std::same_as<BaseOrFloating, MatrixFloating<T, M, N>>
     friend constexpr bool operator!=(const MatrixFloating& m1, const MatrixFloating& m2) {
         for (size_t i = 0; i < M*N; ++i)
-            if (abs(m1.entries_[i] - m2.entries_[i]) > EPSILON)
+            if (std::abs(m1.entries_[i] - m2.entries_[i]) > EPSILON)
                 return true;
         return false;
     }
