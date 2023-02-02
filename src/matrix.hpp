@@ -262,14 +262,14 @@ public:
     using Matrix<float, M, N>::operator=;
 
     friend constexpr bool operator==(const MatrixFloat& m1, const MatrixFloat& m2) {
-        for (int i = 0; i < M*N; ++i)
+        for (size_t i = 0; i < M*N; ++i)
             if (abs(m1.entries_[i] - m2.entries_[i]) > EPSILON)
                 return false;
         return true;
     }
 
     friend constexpr bool operator!=(const MatrixFloat& m1, const MatrixFloat& m2) {
-        for (int i = 0; i < M*N; ++i)
+        for (size_t i = 0; i < M*N; ++i)
             if (abs(m1.entries_[i] - m2.entries_[i]) > EPSILON)
                 return true;
         return false;
@@ -281,24 +281,24 @@ template <size_t M, size_t N>
 class MatrixDouble : public Matrix<double, M, N> {
 public:
     constexpr MatrixDouble()
-        : Matrix<float, M, N>()
+        : Matrix<double, M, N>()
     {}
 
     constexpr MatrixDouble(const std::array<double, M*N> list)
-        : Matrix<float, M, N>(list)
+        : Matrix<double, M, N>(list)
     {}
 
-    using Matrix<float, M, N>::operator=;
+    using Matrix<double, M, N>::operator=;
 
     friend constexpr bool operator==(const MatrixDouble& m1, const MatrixDouble& m2) {
-        for (int i = 0; i < M*N; ++i)
+        for (size_t i = 0; i < M*N; ++i)
             if (abs(m1.entries_[i] - m2.entries_[i]) > EPSILON)
                 return false;
         return true;
     }
 
     friend constexpr bool operator!=(const MatrixDouble& m1, const MatrixDouble m2) {
-        for (int i = 0; i < M*N; ++i)
+        for (size_t i = 0; i < M*N; ++i)
             if (abs(m1.entries_[i] - m2.entries_[i]) > EPSILON)
                 return true;
         return false;
