@@ -188,3 +188,19 @@ TEST(MatrixTest, VectorCrossProduct) {
     EXPECT_EQ(Cross(d, e),  f);
     EXPECT_EQ(Cross(e, d), -f);
 }
+
+TEST(MatrixTest, Transpose) {
+    Matrix4f a({0, 9, 3, 0,
+                9, 8, 0, 8, 
+                1, 8, 5, 3, 
+                0, 0, 5, 8});
+    Matrix4f b({0, 9, 1, 0, 
+                9, 8, 8, 0, 
+                3, 0, 5, 5, 
+                0, 8, 3, 8});
+    EXPECT_EQ(Matrix4f::Transpose(a), b);
+    EXPECT_EQ(Matrix4f::Transpose(b), a);
+
+    Matrix4f id = Matrix4f::Identity();
+    EXPECT_EQ(Matrix4f::Transpose(id), id);
+}
