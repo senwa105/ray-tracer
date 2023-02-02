@@ -5,7 +5,7 @@
 #include <iostream>
 #include <cmath>
 
-constexpr double EPSILON = 0.00001;     // allowed error for floating point comparison
+constexpr float EPSILON = 0.00001;     // allowed error for floating point comparison
 
 template <typename T, size_t M, size_t N> class Matrix;
 template <size_t M, size_t N> class MatrixFloat;
@@ -263,14 +263,15 @@ public:
 
     friend constexpr bool operator==(const MatrixFloat& m1, const MatrixFloat& m2) {
         for (size_t i = 0; i < M*N; ++i)
-            if (abs(m1.entries_[i] - m2.entries_[i]) > EPSILON)
+            if (std::abs(m1.entries_[i] - m2.entries_[i]) > EPSILON)
                 return false;
+            
         return true;
     }
 
     friend constexpr bool operator!=(const MatrixFloat& m1, const MatrixFloat& m2) {
         for (size_t i = 0; i < M*N; ++i)
-            if (abs(m1.entries_[i] - m2.entries_[i]) > EPSILON)
+            if (std::abs(m1.entries_[i] - m2.entries_[i]) > EPSILON)
                 return true;
         return false;
     }
@@ -292,14 +293,14 @@ public:
 
     friend constexpr bool operator==(const MatrixDouble& m1, const MatrixDouble& m2) {
         for (size_t i = 0; i < M*N; ++i)
-            if (abs(m1.entries_[i] - m2.entries_[i]) > EPSILON)
+            if (std::abs(m1.entries_[i] - m2.entries_[i]) > EPSILON)
                 return false;
         return true;
     }
 
     friend constexpr bool operator!=(const MatrixDouble& m1, const MatrixDouble m2) {
         for (size_t i = 0; i < M*N; ++i)
-            if (abs(m1.entries_[i] - m2.entries_[i]) > EPSILON)
+            if (std::abs(m1.entries_[i] - m2.entries_[i]) > EPSILON)
                 return true;
         return false;
     }
