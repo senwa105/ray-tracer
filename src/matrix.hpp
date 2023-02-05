@@ -167,7 +167,11 @@ public:
     friend constexpr bool operator==<T, M, N>(const Matrix& m1, const Matrix& m2);
     friend constexpr bool operator!=<T, M, N>(const Matrix& m1, const Matrix& m2);
 
+    // return submatrix with specified row and col removed
+    // friend constexpr Matrix<T, M-1, N-1> Submatrix<T, M, N>(const Matrix& m, size_t row, size_t col);
+
     // Square Matrix Functions
+
     constexpr T Determinant() const {
         static_assert(M == N, "Determinant is only defined for square matrices; number of rows and cols must be equal");
 
@@ -291,5 +295,14 @@ constexpr bool operator!=(const Matrix<T, M, N>& m1, const Matrix<T, M, N>& m2) 
                 return true;
         return false;
 }
+
+// template <typename T, size_t M, size_t N>
+// requires std::integral<T> || std::floating_point<T>
+// constexpr Matrix<T, M-1, N-1> Submatrix(const Matrix<T, M, N>& m, size_t row, size_t col) {
+//     static_assert(M > 1 && N > 1, "Cannot take submatrix of a row vector or col vector");
+
+//     std::array<T, (M-1)*(N-1)> submatrix_entries{};
+    
+// }
 
 #endif
