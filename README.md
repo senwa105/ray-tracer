@@ -6,3 +6,4 @@ This is a ray tracer built from scratch following the book [The Ray Tracer Chall
 
 ### Features:
 - templatized matrix library with static checking of valid operations and use of C++20 concepts
+- robust unit testing using GoogleTest
