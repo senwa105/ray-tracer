@@ -6,6 +6,8 @@
 #include <cmath>
 #include <concepts>
 
+namespace Matrix {
+
 constexpr float EPSILON = 0.00001;     // allowed error for floating point comparison
 
 template <typename T, size_t M, size_t N> 
@@ -102,6 +104,7 @@ public:
             e = s - e;
         return Matrix(new_entries);
     }
+
     // scalar multiplication
     friend constexpr Matrix<T, M, N> operator*(const Matrix& m, const T& s) {
         std::array new_entries = m.entries_;
@@ -178,7 +181,7 @@ public:
         if constexpr(M == 2) {  // base case when matrix is 2x2
             return entries_[0] * entries_[3] - entries_[1] * entries_[2];
         }
-        else {                  // recursive case
+        else {                  // recursive case TODO
             return -1;
         }
     }
@@ -304,5 +307,6 @@ constexpr bool operator!=(const Matrix<T, M, N>& m1, const Matrix<T, M, N>& m2) 
 //     std::array<T, (M-1)*(N-1)> submatrix_entries{};
     
 // }
+}
 
 #endif
