@@ -120,7 +120,7 @@ public:
     // matrix addition
     friend Matrix<T, M, N> operator+(const Matrix& m1, const Matrix& m2) {
         std::array new_entries = m1.entries_;
-        for (int i = 0; i < M*N; ++i)
+        for (size_t i = 0; i < M*N; ++i)
             new_entries[i] += m2.entries_[i];
         return new_entries;
     }
@@ -128,7 +128,7 @@ public:
     // matrix subtraction
     friend Matrix<T, M, N> operator-(const Matrix& m1, const Matrix& m2) {
         std::array new_entries = m1.entries_;
-        for (int i = 0; i < M*N; ++i)
+        for (size_t i = 0; i < M*N; ++i)
             new_entries[i] -= m2.entries_[i];
         return new_entries;
     }
@@ -157,8 +157,8 @@ public:
 
     // operator <<
     friend std::ostream& operator<<(std::ostream& os, const Matrix& m) {
-        for (int i = 0; i < M; i++) {
-            for (int j = 0; j < N; j++)
+        for (size_t i = 0; i < M; i++) {
+            for (size_t j = 0; j < N; j++)
                 os << m(i, j) << ' ';
             os << '\n';
         }
@@ -252,7 +252,7 @@ public:
         static_assert(N == 1, "Dot is only defined for vectors; number of cols must be one");
 
         T dot = 0;
-        for (int i = 0; i < M; ++i)
+        for (size_t i = 0; i < M; ++i)
             dot += v1.entries_[i] * v2.entries_[i];
         return dot;
     }
@@ -269,7 +269,7 @@ public:
 
 template <std::integral T, size_t M, size_t N>
 constexpr bool operator==(const Matrix<T, M, N>& m1, const Matrix<T, M, N>& m2) {
-    for (int i = 0; i < M*N; ++i)
+    for (size_t i = 0; i < M*N; ++i)
         if (m1.entries_[i] != m2.entries_[i])
             return false;
     return true;
@@ -277,7 +277,7 @@ constexpr bool operator==(const Matrix<T, M, N>& m1, const Matrix<T, M, N>& m2) 
 
 template <std::integral T, size_t M, size_t N>
 constexpr bool operator!=(const Matrix<T, M, N>& m1, const Matrix<T, M, N>& m2) {
-    for (int i = 0; i < M*N; ++i)
+    for (size_t i = 0; i < M*N; ++i)
         if (m1.entries_[i] != m2.entries_[i])
             return true;
     return false;
