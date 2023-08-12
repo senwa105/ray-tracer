@@ -225,3 +225,18 @@ TEST(MatrixTest, Determinant2x2) {
     Matrix2f b({1.5f, 2.5f, 3.5f, 4.5f});
     EXPECT_EQ(b.Determinant(), -2.0f);
 }
+
+TEST(MatrixTest, Submatrix) {
+    Matrix::Matrix<int, 4, 3> a({0, 1,  2,
+                                 3, 4,  5,
+                                 6, 7,  8,
+                                 9, 10, 11});
+    Matrix::Matrix<int, 3, 2> b({4,  5,
+                                 7,  8,
+                                 10, 11});
+    Matrix::Matrix<int, 2, 1> c({4,
+                                 10});
+
+    EXPECT_EQ(Matrix::Submatrix(a, 0, 0), b);
+    EXPECT_EQ(Matrix::Submatrix(b, 1, 1), c);
+}
