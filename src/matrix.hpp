@@ -171,7 +171,7 @@ public:
     friend constexpr bool operator!=<T, M, N>(const Matrix& m1, const Matrix& m2);
 
     // return submatrix with specified row and col removed
-    // friend constexpr Matrix<T, M-1, N-1> Submatrix<T, M, N>(const Matrix& m, size_t row, size_t col);
+    friend constexpr Matrix<T, M-1, N-1> Submatrix<T, M, N>(const Matrix& m, size_t row, size_t col);
 
     // Square Matrix Functions
 
@@ -299,14 +299,27 @@ constexpr bool operator!=(const Matrix<T, M, N>& m1, const Matrix<T, M, N>& m2) 
         return false;
 }
 
-// template <typename T, size_t M, size_t N>
-// requires std::integral<T> || std::floating_point<T>
-// constexpr Matrix<T, M-1, N-1> Submatrix(const Matrix<T, M, N>& m, size_t row, size_t col) {
-//     static_assert(M > 1 && N > 1, "Cannot take submatrix of a row vector or col vector");
+template <typename T, size_t M, size_t N>
+requires std::integral<T> || std::floating_point<T>
+constexpr Matrix<T, M-1, N-1> Submatrix(const Matrix<T, M, N>& m, size_t row, size_t col) {
+    static_assert(M > 1 && N > 1, "Cannot take submatrix of a row vector or col vector");
 
-//     std::array<T, (M-1)*(N-1)> submatrix_entries{};
-    
-// }
+    std::array<T, (M-1)*(N-1)> submatrix{};
+    size_t current_index = 0;
+
+    for (size_t i = 0; i < M; ++i) {
+        if (i == row)
+            continue;
+        for (size_t j = 0; j < N; ++j) {
+            if (j == col)
+                continue;
+            submatrix[current_index++] = m(i, j);
+        }
+    }
+
+    return submatrix;
+}
+
 }
 
 #endif
