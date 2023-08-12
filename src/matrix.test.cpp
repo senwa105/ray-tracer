@@ -1,22 +1,35 @@
 #include <gtest/gtest.h>
 #include "matrix.hpp"
 
+using Matrix::Matrix2i;
+using Matrix::Matrix3i;
+using Matrix::Matrix4i;
+using Matrix::Vector2i;
+using Matrix::Vector3i;
+using Matrix::Vector4i;
+using Matrix::Matrix2f;
+using Matrix::Matrix3f;
+using Matrix::Matrix4f;
+using Matrix::Vector2f;
+using Matrix::Vector3f;
+using Matrix::Vector4f;
+
 TEST(MatrixTest, GetRowCount) {
     Matrix4f a;
     EXPECT_EQ(a.GetRowCount(), 4);
-    Matrix<int, 19, 23> b;
+    Matrix::Matrix<int, 19, 23> b;
     EXPECT_EQ(b.GetRowCount(), 19);
 }
 
 TEST(MatrixTest, GetColCount) {
     Matrix4f a;
     EXPECT_EQ(a.GetColCount(), 4);
-    Matrix<int, 19, 23> b;
+    Matrix::Matrix<int, 19, 23> b;
     EXPECT_EQ(b.GetColCount(), 23);
 }
 
 TEST(MatrixTest, SubscriptOperator) {
-    Matrix<int, 2, 3> a({1, 2, 3, 4, 5, 6});
+    Matrix::Matrix<int, 2, 3> a({1, 2, 3, 4, 5, 6});
     EXPECT_EQ(1, a(0, 0));
     EXPECT_EQ(2, a(0, 1));
     EXPECT_EQ(3, a(0, 2));
@@ -35,9 +48,9 @@ TEST(MatrixTest, FloatComparison) {
 }
 
 TEST(MatrixTest, DoubleComparison) {
-    Matrix<double, 2, 2> a({1.0f, 2.0f, 3.0f, 4.0f});
-    Matrix<double, 2, 2> b({1.1f, 2.2f, 3.3f, 4.4f});
-    Matrix<double, 2, 2> c({1.000001f, 2.000002f, 3.000003f, 4.000004f});
+    Matrix::Matrix<double, 2, 2> a({1.0f, 2.0f, 3.0f, 4.0f});
+    Matrix::Matrix<double, 2, 2> b({1.1f, 2.2f, 3.3f, 4.4f});
+    Matrix::Matrix<double, 2, 2> c({1.000001f, 2.000002f, 3.000003f, 4.000004f});
 
     EXPECT_FALSE(a == b);
     EXPECT_TRUE(a == c);
