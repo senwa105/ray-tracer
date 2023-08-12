@@ -137,20 +137,15 @@ public:
     template <size_t O>
     friend Matrix<T, M, O> operator*(const Matrix<T, M, N>& m1, const Matrix<T, N, O>& m2) {
         Matrix<T, M, O> output;
-        for (size_t row = 0; row < M; ++row) {
-            for (size_t col = 0; col < O; ++col) {
-                for (size_t i = 0; i < N; ++i) {
-                    auto mm = m1(row, i);
-                    auto nn = m2(i, col);
+        for (size_t row = 0; row < M; ++row)
+            for (size_t i = 0; i < N; ++i)
+                for (size_t col = 0; col < O; ++col)
                     output(row, col) += m1(row, i) * m2(i, col);
-                }
-            }
-        }
 
         return output;
     }
 
-    // negation
+    // negatrowon
     Matrix<T, M, N> operator-() const {
         return *this * -1;
     }
@@ -303,6 +298,7 @@ template <typename T, size_t M, size_t N>
 requires std::integral<T> || std::floating_point<T>
 constexpr Matrix<T, M-1, N-1> Submatrix(const Matrix<T, M, N>& m, size_t row, size_t col) {
     static_assert(M > 1 && N > 1, "Cannot take submatrix of a row vector or col vector");
+    // TODO: bounds check for row and col
 
     std::array<T, (M-1)*(N-1)> submatrix{};
     size_t current_index = 0;
