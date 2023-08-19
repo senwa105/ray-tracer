@@ -14,14 +14,6 @@ template <typename T, size_t M, size_t N>
 requires std::integral<T> || std::floating_point<T>
 class Matrix;
 
-template <typename T, size_t M, size_t N> 
-requires std::integral<T>
-class MatrixIntegral;
-
-template <typename T, size_t M, size_t N>
-requires std::floating_point<T>
-class MatrixFloating;
-
 // typedefs for common matrices
 typedef Matrix<int, 2, 2> Matrix2i;
 typedef Matrix<int, 3, 3> Matrix3i;
