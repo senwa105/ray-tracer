@@ -5,6 +5,7 @@
 #include <iostream>
 #include <cmath>
 #include <concepts>
+#include <cassert>
 
 namespace Matrix {
 
@@ -67,8 +68,17 @@ public:
     size_t GetColCount() const { return N; }
 
     // use operator() as the subscript operator
-    T& operator()(size_t row, size_t col)             { return entries_[row*N + col]; }
-    const T& operator()(size_t row, size_t col) const { return entries_[row*N + col]; }
+    T& operator()(size_t row, size_t col) {
+        assert(row < M && row >= 0);
+        assert(col < N && col >= 0);
+        return entries_[row*N + col];
+    }
+    
+    const T& operator()(size_t row, size_t col) const {
+        assert(row < M && row >= 0);
+        assert(col < N && col >= 0);
+        return entries_[row*N + col];
+    }
 
     // scalar addition
     friend constexpr Matrix operator+(const Matrix& m, const T& s) {
