@@ -137,7 +137,7 @@ public:
         return output;
     }
 
-    // negatrowon
+    // negation
     Matrix<T, M, N> operator-() const {
         return *this * -1;
     }
