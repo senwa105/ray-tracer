@@ -242,7 +242,7 @@ TEST(MatrixTest, Submatrix) {
 }
 
 TEST(MatrixTest, Minor) {
-    Matrix3f a{{3,  5,  0,
+    Matrix3i a{{3,  5,  0,
                 2, -1, -7,
                 6, -1,  5}};
 
@@ -251,10 +251,23 @@ TEST(MatrixTest, Minor) {
 }
 
 TEST(MatrixTest, Cofactor) {
-    Matrix3f a{{3,  5,  0,
+    Matrix3i a{{3,  5,  0,
                 2, -1, -7,
                 6, -1,  5}};
 
     EXPECT_EQ(a.Cofactor(0, 0), -12);
     EXPECT_EQ(a.Cofactor(1, 0), -25);
+}
+
+TEST(MatrixTest, DeterminantGeneral) {
+    Matrix3i a{{ 1, 2,  6,
+                -5, 8, -4,
+                 2, 6,  4}};
+    Matrix4i b{{-2, -8,  3,  5,
+                -3,  1,  7,  3,
+                 1,  2, -9,  6,
+                -6,  7,  7, -9}};
+
+    EXPECT_EQ(a.Determinant(), -196);
+    EXPECT_EQ(b.Determinant(), -4071);
 }
