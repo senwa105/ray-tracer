@@ -194,8 +194,12 @@ public:
         if constexpr(M == 2) {  // base case when matrix is 2x2
             return entries_[0] * entries_[3] - entries_[1] * entries_[2];
         }
-        else {                  // recursive case TODO
-            return -1;
+        else {                  // recursive case
+            T det = 0;
+            for (size_t i = 0; i < M; ++i)
+                det += (*this)(0, i) * this->Cofactor(0, i);
+
+            return det;
         }
     }
 
