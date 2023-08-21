@@ -246,5 +246,15 @@ TEST(MatrixTest, Minor) {
                 2, -1, -7,
                 6, -1,  5}};
 
+    EXPECT_EQ(a.Minor(0, 0), -12);
     EXPECT_EQ(a.Minor(1, 0), 25);
+}
+
+TEST(MatrixTest, Cofactor) {
+    Matrix3f a{{3,  5,  0,
+                2, -1, -7,
+                6, -1,  5}};
+
+    EXPECT_EQ(a.Cofactor(0, 0), -12);
+    EXPECT_EQ(a.Cofactor(1, 0), -25);
 }
