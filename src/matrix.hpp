@@ -215,6 +215,10 @@ public:
             return -cofactor;
     }
 
+    constexpr bool IsInvertible() const {
+        return this->Determinant() != 0;
+    }
+
     // Vector Functions
 
     T& X() {
