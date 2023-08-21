@@ -240,3 +240,11 @@ TEST(MatrixTest, Submatrix) {
     EXPECT_EQ(a.Submatrix(0, 0), b);
     EXPECT_EQ(b.Submatrix(1, 1), c);
 }
+
+TEST(MatrixTest, Minor) {
+    Matrix3f a{{3,  5,  0,
+                2, -1, -7,
+                6, -1,  5}};
+
+    EXPECT_EQ(a.Minor(1, 0), 25);
+}
