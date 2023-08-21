@@ -237,6 +237,6 @@ TEST(MatrixTest, Submatrix) {
     Matrix::Matrix<int, 2, 1> c({4,
                                  10});
 
-    EXPECT_EQ(Matrix::Submatrix(a, 0, 0), b);
-    EXPECT_EQ(Matrix::Submatrix(b, 1, 1), c);
+    EXPECT_EQ(a.Submatrix(0, 0), b);
+    EXPECT_EQ(b.Submatrix(1, 1), c);
 }
