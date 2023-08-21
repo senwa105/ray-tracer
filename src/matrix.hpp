@@ -203,6 +203,14 @@ public:
         return this->Submatrix(row, col).Determinant();
     }
 
+    constexpr T Cofactor(size_t row, size_t col) const {
+        T cofactor = this->Minor(row, col);
+        if ((row + col) % 2 == 0)     // Check if even
+            return cofactor;
+        else
+            return -cofactor;
+    }
+
     // Vector Functions
 
     T& X() {
