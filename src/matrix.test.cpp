@@ -271,3 +271,17 @@ TEST(MatrixTest, DeterminantGeneral) {
     EXPECT_EQ(a.Determinant(), -196);
     EXPECT_EQ(b.Determinant(), -4071);
 }
+
+TEST(MatrixTest, IsInvertible) {
+    Matrix4i a{{6,  4, 4,  4,
+                5,  5, 7,  6,
+                4, -9, 3, -7,
+                9,  1, 7, -6}};
+    Matrix4i b{{-4,  2, -2, -3,
+                 9,  6,  2,  6,
+                 0, -5,  1, -5,
+                 0,  0,  0,  0}};
+
+    EXPECT_TRUE(a.IsInvertible());
+    EXPECT_FALSE(b.IsInvertible());
+}
