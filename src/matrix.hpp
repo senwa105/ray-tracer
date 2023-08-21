@@ -219,6 +219,19 @@ public:
         return this->Determinant() != 0;
     }
 
+    constexpr Matrix<T, M, N> Inverse() const {
+        // TODO: handle non-invertible matrices
+
+        Matrix<T, M, N> inv{};
+        T det = this->Determinant();
+
+        for (size_t i = 0; i < M; ++i)
+            for (size_t j = 0; j < N; ++j)
+                inv(j, i) = this->Cofactor(i, j) / det;
+
+        return inv;
+    }
+
     // Vector Functions
 
     T& X() {
