@@ -168,7 +168,7 @@ public:
     friend constexpr bool operator!=<T, M, N>(const Matrix& m1, const Matrix& m2);
 
     // return submatrix with specified row and col removed
-    constexpr Matrix<T, M-1, N-1> Submatrix(size_t row, size_t col) {
+    constexpr Matrix<T, M-1, N-1> Submatrix(size_t row, size_t col) const {
         static_assert(M > 1 && N > 1, "Cannot take submatrix of a row vector or col vector");
         // TODO: bounds check for row and col
 
@@ -188,8 +188,6 @@ public:
         return submatrix;
     }
 
-    // Square Matrix Functions
-
     constexpr T Determinant() const {
         static_assert(M == N, "Determinant is only defined for square matrices; number of rows and cols must be equal");
 
@@ -199,6 +197,10 @@ public:
         else {                  // recursive case TODO
             return -1;
         }
+    }
+
+    constexpr T Minor(size_t row, size_t col) const {
+        return this->Submatrix(row, col).Determinant();
     }
 
     // Vector Functions
