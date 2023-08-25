@@ -28,8 +28,8 @@ FetchContent_MakeAvailable(googletest)
 enable_testing()
 
 set(TEST_SOURCES
-    src/matrix.test.cpp 
-    src/color.test.cpp
+    tests/matrix.test.cpp 
+    tests/color.test.cpp
 )
 
 foreach(SRC IN LISTS TEST_SOURCES)
@@ -38,6 +38,7 @@ foreach(SRC IN LISTS TEST_SOURCES)
 
     add_executable(${EXE_NAME} ${SRC})
     target_link_libraries(${EXE_NAME} GTest::gtest_main)
+    target_include_directories(${EXE_NAME} PUBLIC src)
 endforeach()
 
 include(CTest)
