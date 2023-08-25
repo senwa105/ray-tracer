@@ -286,6 +286,14 @@ TEST(MatrixTest, IsInvertible) {
     EXPECT_FALSE(b.IsInvertible());
 }
 
+TEST(MatrixTest, NoninvertibleMatrix) {
+    Matrix4i b{{-4,  2, -2, -3,
+                 9,  6,  2,  6,
+                 0, -5,  1, -5,
+                 0,  0,  0,  0}};
+    EXPECT_THROW(b.Inverse(), std::runtime_error);
+}
+
 TEST(MatrixTest, Inverse) {
     Matrix4f a{{-5,  2,  6, -8,
                  1, -5,  1,  8,
