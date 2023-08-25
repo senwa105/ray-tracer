@@ -35,3 +35,13 @@ TEST_F(ColorTest, Addition) {
     Color c({0.61, 0.82, 1.03});
     EXPECT_EQ(a + b, c);
 }
+
+TEST_F(ColorTest, Subtraction) {
+    Color c({0.39, 0.38, 0.37});
+    EXPECT_EQ(b - a, c);
+}
+
+TEST_F(ColorTest, Multiplication) {
+    Color c({0.055, 0.132, 0.231});
+    EXPECT_EQ(a * b, c);
+}
