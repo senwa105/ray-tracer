@@ -32,9 +32,9 @@ public:
         return a.rgb_ != b.rgb_;
     }
 
-    // friend Color operator+(const Color& a, const Color& b) {
-    //     return Color(a.rgb_ + b.rgb_);
-    // }
+    friend Color operator+(const Color& a, const Color& b) {
+        return Color(a.rgb_ + b.rgb_);
+    }
 };
 
 }
