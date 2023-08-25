@@ -149,6 +149,16 @@ TEST(MatrixTest, VectorComponentAccess) {
     EXPECT_FLOAT_EQ(v.Y(), 2);
     EXPECT_FLOAT_EQ(v.Z(), 3);
     EXPECT_FLOAT_EQ(v.W(), 4);
+
+    v.X() = 4;
+    v.Y() = 3;
+    v.Z() = 2;
+    v.W() = 1;
+
+    EXPECT_FLOAT_EQ(v.X(), 4);
+    EXPECT_FLOAT_EQ(v.Y(), 3);
+    EXPECT_FLOAT_EQ(v.Z(), 2);
+    EXPECT_FLOAT_EQ(v.W(), 1);
 }
 
 TEST(MatrixTest, VectorNorm) {
