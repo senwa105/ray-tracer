@@ -2,7 +2,8 @@
 #define CANVAS_H
 
 #include <vector>
-#include <array>
+#include <string>
+#include <format>
 #include "color.hpp"
 
 namespace RT {
@@ -41,6 +42,10 @@ public:
         pixels_[y*width_ + x] = color;
     }
 };
+
+std::string CanvasToPPM(const Canvas& canvas) {
+    return std::format("P3\n{} {}\n255\n", canvas.GetWidth(), canvas.GetHeight());
+}
 
 }
 
