@@ -35,6 +35,14 @@ public:
     friend Color operator+(const Color& a, const Color& b) {
         return Color(a.rgb_ + b.rgb_);
     }
+
+    friend Color operator-(const Color& a, const Color& b) {
+        return Color(a.rgb_ - b.rgb_);
+    }
+
+    friend Color operator*(const Color& a, const Color& b) {
+        return Color(Hadamard(a.rgb_, b.rgb_));
+    }
 };
 
 }
