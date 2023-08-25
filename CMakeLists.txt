@@ -8,6 +8,7 @@ set(SOURCES
     src/main.cpp 
     src/matrix.hpp 
     src/color.hpp
+    src/canvas.hpp
 )
 
 add_executable(${PROJECT_NAME} ${SOURCES})
@@ -30,6 +31,7 @@ enable_testing()
 set(TEST_SOURCES
     tests/matrix.test.cpp 
     tests/color.test.cpp
+    tests/canvas.test.cpp
 )
 
 foreach(SRC IN LISTS TEST_SOURCES)
