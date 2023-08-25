@@ -170,7 +170,8 @@ public:
     // return submatrix with specified row and col removed
     constexpr Matrix<T, M-1, N-1> Submatrix(size_t row, size_t col) const {
         static_assert(M > 1 && N > 1, "Cannot take submatrix of a row vector or col vector");
-        // TODO: bounds check for row and col
+        assert(row < M && "Row index out of bounds");
+        assert(col < N && "Column index out of bounds");
 
         std::array<T, (M-1)*(N-1)> submatrix{};
         size_t current_index = 0;
