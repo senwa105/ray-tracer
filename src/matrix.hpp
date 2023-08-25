@@ -276,7 +276,7 @@ public:
         return entries_[3];
     }
 
-    const T Norm() const {
+    constexpr T Norm() const {
         static_assert(N == 1, "Norm is only defined for vectors; number of cols must be one");
 
         T sum = 0;
@@ -294,7 +294,16 @@ public:
             e /= norm;
         
         return Matrix(new_entries);
-    } 
+    }
+
+    friend constexpr Matrix<T, M, 1> Hadamard(Matrix& v1, Matrix& v2) {
+        static_assert(N == 1, "Dot is only defined for vectors; number of cols must be one");
+        
+        std::array hadamard = v1.entries_;
+        for (size_t i = 0; i < M; ++i)
+            hadamard[i] *= v2.entries_[i];
+        return Matrix(hadamard);
+    }
 
     friend constexpr T Dot(const Matrix& v1, const Matrix& v2) {
         static_assert(N == 1, "Dot is only defined for vectors; number of cols must be one");
