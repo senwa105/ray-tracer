@@ -69,14 +69,14 @@ public:
 
     // use operator() as the subscript operator
     T& operator()(size_t row, size_t col) {
-        assert(row < M && row >= 0);
-        assert(col < N && col >= 0);
+        assert(row < M && row >= 0 && "Row index out of bounds");
+        assert(col < N && col >= 0 && "Column index out of bounds");
         return entries_[row*N + col];
     }
     
     const T& operator()(size_t row, size_t col) const {
-        assert(row < M && row >= 0);
-        assert(col < N && col >= 0);
+        assert(row < M && row >= 0 && "Row index out of bounds");
+        assert(col < N && col >= 0 && "Column index out of bounds");
         return entries_[row*N + col];
     }
 
