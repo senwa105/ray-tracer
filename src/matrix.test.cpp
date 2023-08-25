@@ -188,6 +188,18 @@ TEST(MatrixTest, VectorNormalization) {
     EXPECT_FLOAT_EQ(norm.Norm(), 1);
 }
 
+TEST(MatrixTest, VectorHadamardProduct) {
+    Vector3i a({1, 2, 3});
+    Vector3i b({2, 3, 4});
+    Vector3i h1({2, 6, 12});
+    EXPECT_EQ(Hadamard(a, b),  h1);
+
+    Vector3f c({-0.5, 2.5, 4.0});
+    Vector3f d({1.5, -3.0, -2.5});
+    Vector3f h2({-0.75, -7.5, -10});
+    EXPECT_EQ(Hadamard(c, d), h2);
+}
+
 TEST(MatrixTest, VectorDotProduct) {
     Vector3i a({1, 2, 3});
     Vector3i b({2, 3, 4});
