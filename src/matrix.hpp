@@ -37,16 +37,16 @@ protected:
 
 public:
     // construct zero matrix by default
-    constexpr Matrix() = default;
+    constexpr Matrix() noexcept = default;
 
     // construct matrix from array literal
-    constexpr Matrix(const std::array<T, M*N> list) {
+    constexpr Matrix(const std::array<T, M*N> list) noexcept {
         for (size_t i = 0; i < M*N; ++i)
             entries_[i] = list[i];
     }
 
     // construct identity matrix
-    static constexpr Matrix Identity() {
+    static constexpr Matrix Identity() noexcept {
         static_assert(M == N, "Identity matrix can only be constructed for square matrices");
 
         std::array<T, M*N> entries{};
@@ -55,7 +55,7 @@ public:
         return Matrix(entries);
     }
 
-    static constexpr Matrix<T, N, M> Transpose(const Matrix& m) {
+    static constexpr Matrix<T, N, M> Transpose(const Matrix& m) noexcept {
         std::array<T, N*M> transpose_entries{};
         for (size_t row = 0; row < M; ++row)
             for (size_t col = 0; col < N; ++col)
