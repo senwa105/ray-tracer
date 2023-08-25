@@ -68,13 +68,13 @@ public:
     size_t GetColCount() const { return N; }
 
     // use operator() as the subscript operator
-    T& operator()(size_t row, size_t col) {
+    T& operator()(const size_t row, const size_t col) {
         assert(row < M && row >= 0 && "Row index out of bounds");
         assert(col < N && col >= 0 && "Column index out of bounds");
         return entries_[row*N + col];
     }
     
-    const T& operator()(size_t row, size_t col) const {
+    const T& operator()(const size_t row, const size_t col) const {
         assert(row < M && row >= 0 && "Row index out of bounds");
         assert(col < N && col >= 0 && "Column index out of bounds");
         return entries_[row*N + col];
@@ -168,7 +168,7 @@ public:
     friend constexpr bool operator!=<T, M, N>(const Matrix& m1, const Matrix& m2);
 
     // return submatrix with specified row and col removed
-    constexpr Matrix<T, M-1, N-1> Submatrix(size_t row, size_t col) const {
+    constexpr Matrix<T, M-1, N-1> Submatrix(const size_t row, const size_t col) const {
         static_assert(M > 1 && N > 1, "Cannot take submatrix of a row vector or col vector");
         assert(row < M && "Row index out of bounds");
         assert(col < N && "Column index out of bounds");
@@ -204,11 +204,11 @@ public:
         }
     }
 
-    constexpr T Minor(size_t row, size_t col) const {
+    constexpr T Minor(const size_t row, const size_t col) const {
         return this->Submatrix(row, col).Determinant();
     }
 
-    constexpr T Cofactor(size_t row, size_t col) const {
+    constexpr T Cofactor(const size_t row, const size_t col) const {
         T cofactor = this->Minor(row, col);
         if ((row + col) % 2 == 0)     // Check if even
             return cofactor;
@@ -285,7 +285,7 @@ public:
         return sqrt(sum);
     }
 
-    friend constexpr Matrix<T, M, 1> Normalize(Matrix& v) {
+    friend constexpr Matrix<T, M, 1> Normalize(const Matrix& v) {
         static_assert(N == 1, "Normalize is only defined for vectors; number of cols must be one");
 
         T norm = v.Norm();
@@ -296,7 +296,7 @@ public:
         return Matrix(new_entries);
     }
 
-    friend constexpr Matrix<T, M, 1> Hadamard(Matrix& v1, Matrix& v2) {
+    friend constexpr Matrix<T, M, 1> Hadamard(const Matrix& v1, const Matrix& v2) {
         static_assert(N == 1, "Dot is only defined for vectors; number of cols must be one");
         
         std::array hadamard = v1.entries_;

@@ -4,16 +4,17 @@ project(ray-tracer)
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
-include(FetchContent)
-
 set(SOURCES 
     src/main.cpp 
     src/matrix.hpp 
+    src/color.hpp
 )
 
 add_executable(${PROJECT_NAME} ${SOURCES})
 
 # Get GoogleTest
+include(FetchContent)
+
 FetchContent_Declare(
     googletest 
     GIT_REPOSITORY https://github.com/google/googletest.git
@@ -26,8 +27,22 @@ FetchContent_MakeAvailable(googletest)
 # Create tests
 enable_testing()
 
-add_executable(matrix_test src/matrix.test.cpp)
-target_link_libraries(matrix_test GTest::gtest_main)
+set(TEST_SOURCES
+    tests/matrix.test.cpp 
+    tests/color.test.cpp
+)
 
+foreach(SRC IN LISTS TEST_SOURCES)
+    cmake_path(GET SRC STEM LAST_ONLY EXE_NAME)
+    list(APPEND TEST_EXECUTABLES ${EXE_NAME})
+
+    add_executable(${EXE_NAME} ${SRC})
+    target_link_libraries(${EXE_NAME} GTest::gtest_main)
+    target_include_directories(${EXE_NAME} PUBLIC src)
+endforeach()
+
+include(CTest)
 include(GoogleTest)
-gtest_discover_tests(matrix_test)
+foreach(TEST IN LISTS TEST_EXECUTABLES)
+    gtest_discover_tests(${TEST})
+endforeach()
