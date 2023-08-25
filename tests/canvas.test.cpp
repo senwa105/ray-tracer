@@ -1,4 +1,5 @@
 #include <gtest/gtest.h>
+#include <string>
 #include "canvas.hpp"
 
 class CanvasTest : public ::testing::Test {
@@ -17,4 +18,12 @@ TEST_F(CanvasTest, WritePixel) {
     RT::Color red({1, 0, 0});
     c.WritePixel(2, 3, red);
     EXPECT_EQ(red, c.PixelAt(2, 3));
+}
+
+TEST_F(CanvasTest, CanvasToPPM) {
+    std::string header = RT::CanvasToPPM(c);
+    std::string expected = "P3\n"
+                           "10 20\n"
+                           "255\n";
+    EXPECT_EQ(header, expected);
 }
