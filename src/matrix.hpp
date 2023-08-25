@@ -220,7 +220,8 @@ public:
     }
 
     constexpr Matrix<T, M, N> Inverse() const {
-        // TODO: handle non-invertible matrices
+        if (!this->IsInvertible())
+            throw std::runtime_error("Cannot take inverse of noninvertible matrix");
 
         Matrix<T, M, N> inv{};
         T det = this->Determinant();
