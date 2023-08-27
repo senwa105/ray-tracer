@@ -1,6 +1,7 @@
 #ifndef TRANSFORMATION_H
 #define TRANSFORMATION_H
 
+#include <cmath>
 #include "matrix.hpp"
 
 namespace RT {
@@ -29,6 +30,20 @@ Matrix::Matrix4f Scale(const float x, const float y, const float z) {
     t(3, 3) = 1;
     return t;
 }
+
+Matrix::Matrix4f RotateX(const float radians) {
+    Matrix::Matrix4f t{};
+    t(0, 0) = t(3, 3) = 1;
+    t(1, 1) = t(2, 2) = std::cos(radians);
+    t(1, 2) = -std::sin(radians);
+    t(2, 1) = std::sin(radians);
+    return t;
+}
+
+Matrix::Matrix4f RotateY(const float radians);
+
+Matrix::Matrix4f RotateZ(const float radians);
+
 
 }
 
