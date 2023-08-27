@@ -15,9 +15,9 @@ protected:
 };
 
 TEST_F(ColorTest, Getters) {
-    EXPECT_FLOAT_EQ(a.red(), 0.11);
-    EXPECT_FLOAT_EQ(a.green(), 0.22);
-    EXPECT_FLOAT_EQ(a.blue(), 0.33);
+    EXPECT_FLOAT_EQ(a.Red(), 0.11);
+    EXPECT_FLOAT_EQ(a.Green(), 0.22);
+    EXPECT_FLOAT_EQ(a.Blue(), 0.33);
 }
 
 TEST_F(ColorTest, Comparison) {
@@ -44,4 +44,16 @@ TEST_F(ColorTest, Subtraction) {
 TEST_F(ColorTest, Multiplication) {
     Color c({0.055, 0.132, 0.231});
     EXPECT_EQ(a * b, c);
+}
+
+TEST_F(ColorTest, Clamp8Bit) {
+    ColorClamped8Bit clampedA({28, 56, 84});
+    ColorClamped8Bit clampedB({128, 153, 179});
+
+    Color c({-0.5, 1, 1.5});
+    ColorClamped8Bit clampedC({0, 255, 255});
+
+    EXPECT_EQ(a.Clamp8Bit(), clampedA);
+    EXPECT_EQ(b.Clamp8Bit(), clampedB);
+    EXPECT_EQ(c.Clamp8Bit(), clampedC);
 }
