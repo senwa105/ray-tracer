@@ -45,3 +45,15 @@ TEST_F(ColorTest, Multiplication) {
     Color c({0.055, 0.132, 0.231});
     EXPECT_EQ(a * b, c);
 }
+
+TEST_F(ColorTest, Clamp8Bit) {
+    ColorClamped8Bit clampedA({28, 56, 84});
+    ColorClamped8Bit clampedB({128, 153, 179});
+
+    Color c({-0.5, 1, 1.5});
+    ColorClamped8Bit clampedC({0, 255, 255});
+
+    EXPECT_EQ(a.Clamp8Bit(), clampedA);
+    EXPECT_EQ(b.Clamp8Bit(), clampedB);
+    EXPECT_EQ(c.Clamp8Bit(), clampedC);
+}
