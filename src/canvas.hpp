@@ -44,14 +44,6 @@ public:
     }
 };
 
-unsigned int Clamp(const float unclamped, const unsigned int max) {
-    if (unclamped < 0)
-        return 0;
-    if (unclamped > 1)
-        return max;
-    return std::round(unclamped * max);
-}
-
 std::string CanvasToPPM(const Canvas& canvas) {
     const size_t MAX_VALUE = 255;
     const size_t MAX_LINE_LENGTH = 70;
@@ -64,11 +56,11 @@ std::string CanvasToPPM(const Canvas& canvas) {
         std::string line{};
 
         for (size_t x = 0; x < canvas.GetWidth(); ++x) {
-            Color pixel = canvas.PixelAt(x, y);
+            ColorClamped8Bit pixel = canvas.PixelAt(x, y).Clamp8Bit();
             std::string pixelString = std::format("{} {} {} ",
-                                                   Clamp(pixel.Red(), MAX_VALUE),
-                                                   Clamp(pixel.Green(), MAX_VALUE),
-                                                   Clamp(pixel.Blue(), MAX_VALUE));
+                                                   pixel.Red(),
+                                                   pixel.Green(),
+                                                   pixel.Blue());
 
             if (line.length() + pixelString.length() > MAX_LINE_LENGTH) {
                 line[line.length() - 1] = '\n';
