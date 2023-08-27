@@ -21,9 +21,9 @@ protected:
     {}
 
 public:
-    const float red() const { return rgb_.X(); }
-    const float green() const { return rgb_.Y(); }
-    const float blue() const { return rgb_.Z(); }
+    const float Red() const { return rgb_.X(); }
+    const float Green() const { return rgb_.Y(); }
+    const float Blue() const { return rgb_.Z(); }
 
     friend bool operator==(const ColorBase& a, const ColorBase& b) {
         return a.rgb_ == b.rgb_;
@@ -78,9 +78,9 @@ public:
         const unsigned int MAX_VALUE = 255;
 
         return ColorClamped8Bit({
-            Clamp<unsigned int>(this->red(), MAX_VALUE),
-            Clamp<unsigned int>(this->green(), MAX_VALUE),
-            Clamp<unsigned int>(this->blue(), MAX_VALUE),
+            Clamp<unsigned int>(this->Red(), MAX_VALUE),
+            Clamp<unsigned int>(this->Green(), MAX_VALUE),
+            Clamp<unsigned int>(this->Blue(), MAX_VALUE),
         });
     }
 
