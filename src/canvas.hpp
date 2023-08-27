@@ -42,42 +42,40 @@ public:
 
         pixels_[y*width_ + x] = color;
     }
-};
 
-std::string CanvasToPPM(const Canvas& canvas) {
-    const size_t MAX_VALUE = 255;
-    const size_t MAX_LINE_LENGTH = 70;
+    static std::string ToPPM(const Canvas& canvas) {
+        const size_t MAX_LINE_LENGTH = 70;
 
-    // Header
-    std::string ppm = std::format("P3\n{} {}\n255\n", canvas.GetWidth(), canvas.GetHeight());
-    
-    // Payload
-    for (size_t y = 0; y < canvas.GetHeight(); ++y) {
-        std::string line{};
+        // Header
+        std::string ppm = std::format("P3\n{} {}\n255\n", canvas.GetWidth(), canvas.GetHeight());
+        
+        // Payload
+        for (size_t y = 0; y < canvas.GetHeight(); ++y) {
+            std::string line{};
 
-        for (size_t x = 0; x < canvas.GetWidth(); ++x) {
-            ColorClamped8Bit pixel = canvas.PixelAt(x, y).Clamp8Bit();
-            std::string pixelString = std::format("{} {} {} ",
-                                                   pixel.Red(),
-                                                   pixel.Green(),
-                                                   pixel.Blue());
+            for (size_t x = 0; x < canvas.GetWidth(); ++x) {
+                ColorClamped8Bit pixel = canvas.PixelAt(x, y).Clamp8Bit();
+                std::string pixelString = std::format("{} {} {} ",
+                                                    pixel.Red(),
+                                                    pixel.Green(),
+                                                    pixel.Blue());
 
-            if (line.length() + pixelString.length() > MAX_LINE_LENGTH) {
-                line[line.length() - 1] = '\n';
-                ppm += line;
-                line.clear();
+                if (line.length() + pixelString.length() > MAX_LINE_LENGTH) {
+                    line[line.length() - 1] = '\n';
+                    ppm += line;
+                    line.clear();
+                }
+
+                line += pixelString;
             }
 
-
-            line += pixelString;
+            line[line.length() - 1] = '\n';
+            ppm += line;
         }
 
-        line[line.length() - 1] = '\n';
-        ppm += line;
+        return ppm;
     }
-
-    return ppm;
-}
+};
 
 }
 

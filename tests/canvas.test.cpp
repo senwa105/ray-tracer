@@ -37,7 +37,7 @@ TEST_F(CanvasTest, CanvasToPPM) {
                            "0 0 0 0 0 0 0 128 0 0 0 0 0 0 0\n"
                            "0 0 0 0 0 0 0 0 0 0 0 0 0 0 255\n";
 
-    EXPECT_EQ(CanvasToPPM(c), expected);
+    EXPECT_EQ(RT::Canvas::ToPPM(c), expected);
 }
 
 TEST_F(CanvasTest, PPMSplitLines) {
@@ -56,6 +56,6 @@ TEST_F(CanvasTest, PPMSplitLines) {
                            "255 204 153 255 204 153 255 204 153 255 204 153 255 204 153\n"
                            "255 204 153 255 204 153 255 204 153\n";
 
-    auto ppm = RT::CanvasToPPM(canvas);
+    auto ppm = RT::Canvas::ToPPM(canvas);
     EXPECT_EQ(ppm, expected);
 }
