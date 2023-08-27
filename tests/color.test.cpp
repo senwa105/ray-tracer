@@ -15,9 +15,9 @@ protected:
 };
 
 TEST_F(ColorTest, Getters) {
-    EXPECT_FLOAT_EQ(a.red(), 0.11);
-    EXPECT_FLOAT_EQ(a.green(), 0.22);
-    EXPECT_FLOAT_EQ(a.blue(), 0.33);
+    EXPECT_FLOAT_EQ(a.Red(), 0.11);
+    EXPECT_FLOAT_EQ(a.Green(), 0.22);
+    EXPECT_FLOAT_EQ(a.Blue(), 0.33);
 }
 
 TEST_F(ColorTest, Comparison) {
