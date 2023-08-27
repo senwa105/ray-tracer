@@ -21,6 +21,15 @@ Matrix::Matrix4f Translate(const float x, const float y, const float z) {
     return t;
 }
 
+Matrix::Matrix4f Scale(const float x, const float y, const float z) {
+    Matrix::Matrix4f t{};
+    t(0, 0) = x;
+    t(1, 1) = y;
+    t(2, 2) = z;
+    t(3, 3) = 1;
+    return t;
+}
+
 }
 
 #endif
