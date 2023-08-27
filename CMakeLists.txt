@@ -9,6 +9,7 @@ set(SOURCES
     src/matrix.hpp 
     src/color.hpp
     src/canvas.hpp
+    src/transformations.hpp
 )
 
 add_executable(${PROJECT_NAME} ${SOURCES})
@@ -32,6 +33,7 @@ set(TEST_SOURCES
     tests/matrix.test.cpp 
     tests/color.test.cpp
     tests/canvas.test.cpp
+    tests/transformations.test.cpp
 )
 
 foreach(SRC IN LISTS TEST_SOURCES)
