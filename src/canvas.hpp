@@ -66,9 +66,9 @@ std::string CanvasToPPM(const Canvas& canvas) {
         for (size_t x = 0; x < canvas.GetWidth(); ++x) {
             Color pixel = canvas.PixelAt(x, y);
             std::string pixelString = std::format("{} {} {} ",
-                                                   Clamp(pixel.red(), MAX_VALUE),
-                                                   Clamp(pixel.green(), MAX_VALUE),
-                                                   Clamp(pixel.blue(), MAX_VALUE));
+                                                   Clamp(pixel.Red(), MAX_VALUE),
+                                                   Clamp(pixel.Green(), MAX_VALUE),
+                                                   Clamp(pixel.Blue(), MAX_VALUE));
 
             if (line.length() + pixelString.length() > MAX_LINE_LENGTH) {
                 line[line.length() - 1] = '\n';
