@@ -3,8 +3,11 @@
 
 #include <vector>
 #include <string>
+#include <string_view>
 #include <format>
 #include <cmath>
+#include <filesystem>
+#include <fstream>
 #include "color.hpp"
 
 namespace RT {
@@ -74,6 +77,20 @@ public:
         }
 
         return ppm;
+    }
+
+    static void Save(const Canvas& canvas, const std::string_view filepath) {
+        std::filesystem::path path(filepath);
+        if (!std::filesystem::is_directory(path.remove_filename()))
+            throw std::runtime_error(std::format("RT::Canvas::Save(): directory {} does not exist", path.remove_filename().string()));
+
+        std::ofstream file{};
+        file.open(path);
+        if (!file.is_open())
+            throw std::runtime_error("RT::Canvas::Save(): failed to open file");
+
+        file << ToPPM(canvas);
+        file.close();
     }
 };
 
