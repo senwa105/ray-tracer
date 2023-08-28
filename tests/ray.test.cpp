@@ -1,6 +1,4 @@
 #include <gtest/gtest.h>
-#include "color.hpp"
-
 #include "ray.hpp"
 #include "shapes.hpp"
 #include "matrix.hpp"
@@ -125,7 +123,7 @@ TEST(RayTest, Transform) {
     auto t = Translate(3, 4, 5);
     auto o1 = Point(4, 6, 8);
     auto d1 = Vector(0, 1, 0);
-    auto r2 = Transform(r, t);
+    auto r2 = Transform(r, t);  
     EXPECT_EQ(r2.origin, o1);
     EXPECT_EQ(r2.direction, d1);
 
@@ -135,4 +133,21 @@ TEST(RayTest, Transform) {
     auto r3 = Transform(r, s);
     EXPECT_EQ(r3.origin, o2);
     EXPECT_EQ(r3.direction, d2);
+}
+
+TEST(RayTest, IntersectScaledSphere) {
+    auto r = Ray(Point(0, 0, -5), Vector(0, 0, 1));
+    auto s = Shapes::Sphere();
+
+    s.SetTransform(Scale(2, 2, 2));
+    auto xs = Intersect(s, r);
+
+    EXPECT_EQ(xs.size(), 2);
+    EXPECT_TRUE(Matrix::ApproxEqual(xs[0].t, 3));
+    EXPECT_TRUE(Matrix::ApproxEqual(xs[1].t, 7));
+
+    s.SetTransform(Translate(5, 0, 0));
+    xs = Intersect(s, r);
+
+    EXPECT_EQ(xs.size(), 0);
 }
