@@ -14,12 +14,12 @@ namespace RT {
 template <typename Shape>
 struct Intersection {
     float t{};
-    std::unique_ptr<Shape> object{};
+    std::shared_ptr<Shape> object{};
 
     Intersection() = default;
-    Intersection(const float tt, Shape& o)
+    Intersection(const float tt, const Shape& o)
         : t{tt},
-          object{std::make_unique<Shape>(o)}
+          object{std::make_shared<Shape>(o)}
     {}
 };
 
@@ -57,6 +57,16 @@ std::vector<float> Intersect(const Shapes::Sphere& sphere, const Ray& ray) {
         std::swap(xs[0], xs[1]);
     
     return xs;    
+}
+
+template<typename Shape>
+std::vector<Intersection<Shape>> Intersections(std::same_as<Intersection<Shape>> auto& ...inter) {
+    std::vector<Intersection<Shape>> intersections{};
+    (intersections.push_back(inter), ...);
+    std::sort(intersections.begin(), intersections.end(), [](Intersection<Shape>& a, Intersection<Shape>& b) {
+        return a.t < b.t;
+    });
+    return intersections;
 }
 
 }
