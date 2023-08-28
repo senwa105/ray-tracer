@@ -118,3 +118,21 @@ TEST(RayTest, Hit) {
     xs = Intersections<Shapes::Sphere>(i1, i2, i3, i4);
     EXPECT_EQ(*Hit(xs), i4);
 }
+
+TEST(RayTest, Transform) {
+    auto r = Ray(Point(1, 2, 3), Vector(0, 1, 0));
+
+    auto t = Translate(3, 4, 5);
+    auto o1 = Point(4, 6, 8);
+    auto d1 = Vector(0, 1, 0);
+    auto r2 = Transform(r, t);
+    EXPECT_EQ(r2.origin, o1);
+    EXPECT_EQ(r2.direction, d1);
+
+    auto s = Scale(2, 3, 4);
+    auto o2 = Point(2, 6, 12);
+    auto d2 = Vector(0, 3, 0);
+    auto r3 = Transform(r, s);
+    EXPECT_EQ(r3.origin, o2);
+    EXPECT_EQ(r3.direction, d2);
+}
