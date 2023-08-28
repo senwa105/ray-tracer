@@ -8,6 +8,8 @@
 #include <cmath>
 #include <filesystem>
 #include <fstream>
+#include <cerrno>
+#include <cstdio>
 #include "color.hpp"
 
 namespace RT {
@@ -81,13 +83,15 @@ public:
 
     static void Save(const Canvas& canvas, const std::string_view filepath) {
         std::filesystem::path path(filepath);
-        if (!std::filesystem::is_directory(path.remove_filename()))
-            throw std::runtime_error(std::format("RT::Canvas::Save(): directory {} does not exist", path.remove_filename().string()));
+        if (!std::filesystem::is_directory(path.parent_path()))
+            throw std::runtime_error(std::format("RT::Canvas::Save(): directory {} does not exist", path.parent_path().string()));
 
         std::ofstream file{};
         file.open(path);
-        if (!file.is_open())
+        if (!file.is_open()) {
+            std::perror("RT::Canvas::Save():");
             throw std::runtime_error("RT::Canvas::Save(): failed to open file");
+        }
 
         file << ToPPM(canvas);
         file.close();
