@@ -51,3 +51,17 @@ TEST(TransformationTest, RotateX) {
     EXPECT_EQ(deg90 * p, b);
     EXPECT_EQ(deg45.Inverse() * p, c);
 }
+
+TEST(TransformationTest, RotateY) {
+    auto p = RT::Point(0, 0, 1);
+    auto deg45 = RT::RotateY(std::numbers::pi / 4);
+    auto deg90 = RT::RotateY(std::numbers::pi / 2);
+
+    auto a = RT::Point(std::sqrt(2) / 2, 0, std::sqrt(2) / 2);
+    auto b = RT::Point(1, 0, 0);
+    auto c = RT::Point(-std::sqrt(2) / 2, 0, std::sqrt(2) / 2);
+
+    EXPECT_EQ(deg45 * p, a);
+    EXPECT_EQ(deg90 * p, b);
+    EXPECT_EQ(deg45.Inverse() * p, c);
+}
