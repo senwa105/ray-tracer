@@ -5,6 +5,7 @@
 #include <cmath>
 #include <algorithm>
 #include <memory>
+#include <optional>
 #include "matrix.hpp"
 #include "transformations.hpp"
 #include "shapes.hpp"
@@ -71,6 +72,17 @@ std::vector<Intersection<Shape>> Intersections(std::same_as<Intersection<Shape>>
         return a.t < b.t;
     });
     return intersections;
+}
+
+template<typename Shape>
+std::optional<Intersection<Shape>> Hit(const std::vector<Intersection<Shape>>& intersections) {
+    // Assume intersections is already sorted
+    for (const Intersection<Shape>& i : intersections) {
+        if (i.t < 0)
+            continue;
+        return std::make_optional(i);   // Return smalleste nonnegative value
+    }
+    return std::nullopt;
 }
 
 }
