@@ -31,8 +31,10 @@ TEST(RayTest, SphereIntersection) {
 
     auto xs = Intersect(s, r);
     EXPECT_EQ(xs.size(), 2);
-    EXPECT_EQ(xs[0], 4.0);
-    EXPECT_EQ(xs[1], 6.0);
+    EXPECT_EQ(xs[0].t, 4.0);
+    EXPECT_EQ(xs[1].t, 6.0);
+    EXPECT_EQ(*xs[0].object, s);
+    EXPECT_EQ(*xs[1].object, s);
 }
 
 TEST(RayTest, SphereTangentIntersection) {
@@ -41,8 +43,8 @@ TEST(RayTest, SphereTangentIntersection) {
 
     auto xs = Intersect(s, r);
     EXPECT_EQ(xs.size(), 2);
-    EXPECT_TRUE(Matrix::ApproxEqual(xs[0], 5.0));
-    EXPECT_TRUE(Matrix::ApproxEqual(xs[1], 5.0));
+    EXPECT_TRUE(Matrix::ApproxEqual(xs[0].t, 5.0));
+    EXPECT_TRUE(Matrix::ApproxEqual(xs[1].t, 5.0));
 }
 
 TEST(RayTest, SphereNoIntersection) {
@@ -59,8 +61,8 @@ TEST(RayTest, SphereInsideIntersection) {
 
     auto xs = Intersect(s, r);
     EXPECT_EQ(xs.size(), 2);
-    EXPECT_TRUE(Matrix::ApproxEqual(xs[0], -1.0));
-    EXPECT_TRUE(Matrix::ApproxEqual(xs[1], 1.0));
+    EXPECT_TRUE(Matrix::ApproxEqual(xs[0].t, -1.0));
+    EXPECT_TRUE(Matrix::ApproxEqual(xs[1].t, 1.0));
 }
 
 TEST(RayTest, SphereRearIntersection) {
@@ -69,8 +71,8 @@ TEST(RayTest, SphereRearIntersection) {
 
     auto xs = Intersect(s, r);
     EXPECT_EQ(xs.size(), 2);
-    EXPECT_TRUE(Matrix::ApproxEqual(xs[0], -6.0));
-    EXPECT_TRUE(Matrix::ApproxEqual(xs[1], -4.0));
+    EXPECT_TRUE(Matrix::ApproxEqual(xs[0].t, -6.0));
+    EXPECT_TRUE(Matrix::ApproxEqual(xs[1].t, -4.0));
 }
 
 TEST(RayTest, Intersection) {
