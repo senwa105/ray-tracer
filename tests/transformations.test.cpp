@@ -104,3 +104,16 @@ TEST(TransformationTest, Shear) {
     EXPECT_EQ(t5 * p, a5);
     EXPECT_EQ(t6 * p, a6);
 }
+
+TEST(TransformationTest, ChainedTransformations) {
+    auto p = RT::Point(1, 0, 1);
+    auto r = RT::RotateX(std::numbers::pi / 2);
+    auto s = RT::Scale(5, 5, 5);
+    auto t = RT::Translate(10, 5, 7);
+
+    auto a = r * p;
+    a = s * a;
+    a = t * a;
+
+    EXPECT_EQ(t * s * r * p, a);
+}
