@@ -11,6 +11,10 @@ struct Ray {
     Matrix::Vector4f direction{};
 };
 
+Matrix::Vector4f Position(const Ray& ray, const float time) {
+    return ray.origin + ray.direction * time;
+}
+
 }
 
 #endif
