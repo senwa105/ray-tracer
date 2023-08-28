@@ -72,3 +72,10 @@ TEST(RayTest, SphereRearIntersection) {
     EXPECT_TRUE(Matrix::ApproxEqual(xs[0], -6.0));
     EXPECT_TRUE(Matrix::ApproxEqual(xs[1], -4.0));
 }
+
+TEST(RayTest, Intersection) {
+    auto s = Shapes::Sphere();
+    auto i = Intersection(3.5, s);
+    EXPECT_TRUE(Matrix::ApproxEqual(i.t, 3.5));
+    EXPECT_EQ(*i.object, s);
+}
