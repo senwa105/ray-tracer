@@ -79,3 +79,28 @@ TEST(TransformationTest, RotateZ) {
     EXPECT_EQ(deg90 * p, b);
     EXPECT_EQ(deg45.Inverse() * p, c);
 }
+
+TEST(TransformationTest, Shear) {
+    auto p = RT::Point(2, 3, 4);
+
+    auto t1 = RT::Shear(1, 0, 0, 0, 0, 0);
+    auto t2 = RT::Shear(0, 1, 0, 0, 0, 0);
+    auto t3 = RT::Shear(0, 0, 1, 0, 0, 0);
+    auto t4 = RT::Shear(0, 0, 0, 1, 0, 0);
+    auto t5 = RT::Shear(0, 0, 0, 0, 1, 0);
+    auto t6 = RT::Shear(0, 0, 0, 0, 0, 1);
+
+    auto a1 = RT::Point(5, 3, 4);
+    auto a2 = RT::Point(6, 3, 4);
+    auto a3 = RT::Point(2, 5, 4);
+    auto a4 = RT::Point(2, 7, 4);
+    auto a5 = RT::Point(2, 3, 6);
+    auto a6 = RT::Point(2, 3, 7);
+
+    EXPECT_EQ(t1 * p, a1);
+    EXPECT_EQ(t2 * p, a2);
+    EXPECT_EQ(t3 * p, a3);
+    EXPECT_EQ(t4 * p, a4);
+    EXPECT_EQ(t5 * p, a5);
+    EXPECT_EQ(t6 * p, a6);
+}
