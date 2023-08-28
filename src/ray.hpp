@@ -4,19 +4,32 @@
 #include <vector>
 #include <cmath>
 #include <algorithm>
+#include <memory>
 #include "matrix.hpp"
 #include "transformations.hpp"
 #include "shapes.hpp"
 
 namespace RT {
 
+template <typename Shape>
+struct Intersection {
+    float t{};
+    std::unique_ptr<Shape> object{};
+
+    Intersection() = default;
+    Intersection(const float tt, Shape& o)
+        : t{tt},
+          object{std::make_unique<Shape>(o)}
+    {}
+};
+
 struct Ray {
     Matrix::Vector4f origin{};
     Matrix::Vector4f direction{};
 };
 
-Matrix::Vector4f Position(const Ray& ray, const float time) {
-    return ray.origin + ray.direction * time;
+Matrix::Vector4f Position(const Ray& ray, const float t) {
+    return ray.origin + ray.direction * t;
 }
 
 std::vector<float> Intersect(const Shapes::Sphere& sphere, const Ray& ray) {
