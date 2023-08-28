@@ -37,11 +37,16 @@ Matrix::Vector4f Position(const Ray& ray, const float t) {
     return ray.origin + ray.direction * t;
 }
 
-std::vector<Intersection<Shapes::Sphere>> Intersect(const Shapes::Sphere& sphere, const Ray& ray) {
-    Matrix::Vector4f sphereToRay = ray.origin - Point(0, 0, 0);
+Ray Transform(const Ray& ray, const Matrix::Matrix4f& transformation) {
+    return Ray{transformation * ray.origin, transformation * ray.direction};
+}
 
-    float a = Dot(ray.direction, ray.direction);
-    float b = 2 * Dot(ray.direction, sphereToRay);
+std::vector<Intersection<Shapes::Sphere>> Intersect(const Shapes::Sphere& sphere, const Ray& ray) {
+    Ray ray2 = Transform(ray, sphere.GetTransform().Inverse());
+    Matrix::Vector4f sphereToRay = ray2.origin - Point(0, 0, 0);
+
+    float a = Dot(ray2.direction, ray2.direction);
+    float b = 2 * Dot(ray2.direction, sphereToRay);
     float c = Dot(sphereToRay, sphereToRay) - 1;
     float discriminant = b*b - 4*a*c;
 
@@ -49,13 +54,8 @@ std::vector<Intersection<Shapes::Sphere>> Intersect(const Shapes::Sphere& sphere
     if (discriminant < 0)
         // No intersections
         return xs;
-    if (Matrix::ApproxEqual(discriminant, 1)) {
-        // One intersection
-        float t = (-b + std::sqrt(discriminant)) / (2 * a);
-        xs[0] = xs[1] = Intersection<Shapes::Sphere>{t, sphere};
-        return xs;
-    }
-    // Two intersections
+
+    // One or two intersections
     float t1 = (-b - std::sqrt(discriminant)) / (2 * a);
     float t2 = (-b + std::sqrt(discriminant)) / (2 * a);
 
@@ -87,10 +87,6 @@ std::optional<Intersection<Shape>> Hit(const std::vector<Intersection<Shape>>& i
         return std::make_optional(i);   // Return smalleste nonnegative value
     }
     return std::nullopt;
-}
-
-Ray Transform(const Ray& ray, const Matrix::Matrix4f& transformation) {
-    return Ray{transformation * ray.origin, transformation * ray.direction};
 }
 
 }
