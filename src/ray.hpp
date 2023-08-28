@@ -22,6 +22,10 @@ struct Intersection {
         : t{tt},
           object{std::make_shared<Shape>(o)}
     {}
+
+    friend bool operator==(const Intersection& a, const Intersection& b) {
+        return (a.t == b.t) && (a.object == b.object);
+    }
 };
 
 struct Ray {
