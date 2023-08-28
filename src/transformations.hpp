@@ -58,6 +58,18 @@ Matrix::Matrix4f RotateZ(const float radians) {
     return t;
 }
 
+Matrix::Matrix4f Shear(const float xToY, const float xToZ,
+                       const float yToX, const float yToZ,
+                       const float zToX, const float zToY) {
+    Matrix::Matrix4f t = Matrix::Matrix4f::Identity();
+    t(0, 1) = xToY;
+    t(0, 2) = xToZ;
+    t(1, 0) = yToX;
+    t(1, 2) = yToZ;
+    t(2, 0) = zToX;
+    t(2, 1) = zToY;
+    return t;
+}
 
 }
 
