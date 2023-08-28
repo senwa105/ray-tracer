@@ -79,3 +79,14 @@ TEST(RayTest, Intersection) {
     EXPECT_TRUE(Matrix::ApproxEqual(i.t, 3.5));
     EXPECT_EQ(*i.object, s);
 }
+
+TEST(RayTest, Intersections) {
+    Shapes::Sphere s = Shapes::Sphere();
+    Intersection<Shapes::Sphere> i1 = Intersection(1, s);
+    Intersection<Shapes::Sphere> i2 = Intersection(2, s);
+    auto xs = Intersections<Shapes::Sphere>(i1, i2);
+    
+    EXPECT_EQ(xs.size(), 2);
+    EXPECT_TRUE(Matrix::ApproxEqual(xs[0].t, 1));
+    EXPECT_TRUE(Matrix::ApproxEqual(xs[1].t, 2));
+}
