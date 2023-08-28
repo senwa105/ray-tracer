@@ -89,6 +89,10 @@ std::optional<Intersection<Shape>> Hit(const std::vector<Intersection<Shape>>& i
     return std::nullopt;
 }
 
+Ray Transform(const Ray& ray, const Matrix::Matrix4f& transformation) {
+    return Ray{transformation * ray.origin, transformation * ray.direction};
+}
+
 }
 
 #endif
