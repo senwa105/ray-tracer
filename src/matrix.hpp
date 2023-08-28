@@ -322,6 +322,10 @@ public:
                        v1.Z() * v2.X() - v1.X() * v2.Z(), 
                        v1.X() * v2.Y() - v1.Y() * v2.X()});
     }
+
+    friend constexpr bool ApproxEqual(const Matrix& m1, const Matrix& m2) {
+        return m1 == m2;
+    }
 };
 
 template <std::integral T, size_t M, size_t N>
@@ -354,6 +358,10 @@ constexpr bool operator!=(const Matrix<T, M, N>& m1, const Matrix<T, M, N>& m2) 
             if (std::abs(m1.entries_[i] - m2.entries_[i]) > EPSILON)
                 return true;
         return false;
+}
+
+constexpr bool ApproxEqual(const float a, const float b) {
+    return std::abs(a - b) <= EPSILON;
 }
 
 }
