@@ -83,12 +83,38 @@ TEST(RayTest, Intersection) {
 }
 
 TEST(RayTest, Intersections) {
-    Shapes::Sphere s = Shapes::Sphere();
-    Intersection<Shapes::Sphere> i1 = Intersection(1, s);
-    Intersection<Shapes::Sphere> i2 = Intersection(2, s);
+    auto s = Shapes::Sphere();
+    auto i1 = Intersection(1, s);
+    auto i2 = Intersection(2, s);
     auto xs = Intersections<Shapes::Sphere>(i1, i2);
     
     EXPECT_EQ(xs.size(), 2);
     EXPECT_TRUE(Matrix::ApproxEqual(xs[0].t, 1));
     EXPECT_TRUE(Matrix::ApproxEqual(xs[1].t, 2));
+}
+
+TEST(RayTest, Hit) {
+    auto s = Shapes::Sphere();
+
+    auto i1 = Intersection(1, s);
+    auto i2 = Intersection(2, s);
+    auto xs = Intersections<Shapes::Sphere>(i2, i1);
+    EXPECT_EQ(*Hit(xs), i1);
+
+    i1 = Intersection(-1, s);
+    i2 = Intersection(1, s);
+    xs = Intersections<Shapes::Sphere>(i2, i1);
+    EXPECT_EQ(*Hit(xs), i2);
+
+    i1 = Intersection(-2, s);
+    i2 = Intersection(-1, s);
+    xs = Intersections<Shapes::Sphere>(i2, i1);
+    EXPECT_FALSE(Hit(xs));
+
+    i1 = Intersection(5, s);
+    i2 = Intersection(7, s);
+    auto i3 = Intersection(-3, s);
+    auto i4 = Intersection(2, s);
+    xs = Intersections<Shapes::Sphere>(i1, i2, i3, i4);
+    EXPECT_EQ(*Hit(xs), i4);
 }
