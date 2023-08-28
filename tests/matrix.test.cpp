@@ -56,6 +56,24 @@ TEST(MatrixTest, DoubleComparison) {
     EXPECT_TRUE(a == c);
 }
 
+TEST(MatrixTest, ApproxEqualMatrix) {
+    Matrix2f a({1.0f, 2.0f, 3.0f, 4.0f});
+    Matrix2f b({1.1f, 2.2f, 3.3f, 4.4f});
+    Matrix2f c({1.000001f, 2.000002f, 3.000003f, 4.000004f});
+
+    EXPECT_FALSE(ApproxEqual(a, b));
+    EXPECT_TRUE(ApproxEqual(a, c));
+}
+
+TEST(MatrixTest, ApproxEqualFloat) {
+    float a = 1.0f;
+    float b = 1.1f;
+    float c = 1.000001f;
+
+    EXPECT_FALSE(Matrix::ApproxEqual(a, b));
+    EXPECT_TRUE(Matrix::ApproxEqual(a, c));
+}
+
 TEST(MatrixTest, ScalarAddition) {
     Matrix2i a({1, 2, 3, 4});
     Matrix2i b({3, 4, 5, 6});
