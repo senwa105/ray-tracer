@@ -5,6 +5,9 @@ namespace RT::Shapes {
 
 class Sphere {
     // Assume unit sphere (raidus = 1) at origin (0, 0, 0)
+
+public:
+    bool operator==(const Sphere&) const = default;
 };
 
 }
