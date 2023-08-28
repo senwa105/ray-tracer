@@ -37,6 +37,7 @@ set(TEST_SOURCES
     tests/canvas.test.cpp
     tests/transformations.test.cpp
     tests/ray.test.cpp
+    tests/shapes.test.cpp
 )
 
 foreach(SRC IN LISTS TEST_SOURCES)
