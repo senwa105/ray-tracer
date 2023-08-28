@@ -40,7 +40,14 @@ Matrix::Matrix4f RotateX(const float radians) {
     return t;
 }
 
-Matrix::Matrix4f RotateY(const float radians);
+Matrix::Matrix4f RotateY(const float radians) {
+    Matrix::Matrix4f t{};
+    t(1, 1) = t(3, 3) = 1;
+    t(0, 0) = t(2, 2) = std::cos(radians);
+    t(0, 2) = std::sin(radians);
+    t(2, 0) = -std::sin(radians);
+    return t;
+}
 
 Matrix::Matrix4f RotateZ(const float radians);
 
