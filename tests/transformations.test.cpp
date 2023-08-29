@@ -117,3 +117,13 @@ TEST(TransformationsTest, ChainedTransformations) {
 
     EXPECT_EQ(t * s * r * p, a);
 }
+
+TEST(TransformationsTest, ReflectAcrossNormal) {
+    auto v = RT::Vector(1, -1, 0);
+    auto n = RT::Vector(0, 1, 0);
+    EXPECT_EQ(RT::Reflect(v, n), RT::Vector(1, 1, 0));
+
+    v = RT::Vector(0, -1, 0);
+    n = RT::Vector(std::sqrt(2) / 2, std::sqrt(2) / 2, 0);
+    EXPECT_EQ(RT::Reflect(v, n), RT::Vector(1, 0, 0));
+}
