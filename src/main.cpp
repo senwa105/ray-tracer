@@ -1,7 +1,8 @@
 #include <iostream>
 
 #include "matrix.hpp"
-#include "ray.hpp"
+#include "transformations.h"
+#include "ray.h"
 #include "canvas.h"
 
 int main() {

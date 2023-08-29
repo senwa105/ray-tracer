@@ -1,5 +1,6 @@
 #include <gtest/gtest.h>
-#include "ray.hpp"
+#include "ray.h"
+#include "transformations.h"
 #include "shapes.hpp"
 #include "matrix.hpp"
 
