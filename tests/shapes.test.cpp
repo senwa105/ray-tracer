@@ -1,4 +1,6 @@
 #include <gtest/gtest.h>
+#include <numbers>
+#include <cmath>
 #include "shapes.h"
 #include "transformations.h"
 
@@ -38,4 +40,15 @@ TEST(SphereTest, NormalAt) {
     p = RT::Point(x, x, x);
     EXPECT_EQ(s.NormalAt(p), n);
     EXPECT_EQ(Normalize(n), n);
+}
+
+TEST(SphereTest, TransformedNormalAt) {
+    auto s = RT::Shapes::Sphere();
+    s.SetTransform(RT::Translate(0, 1, 0));
+    EXPECT_EQ(s.NormalAt(RT::Point(0, 1.70711, -0.70711)),
+              RT::Vector(0, 0.70711, -0.70711));
+
+    s.SetTransform(RT::Scale(1, 0.5, 1) * RT::RotateZ(std::numbers::pi / 5));
+    EXPECT_EQ(s.NormalAt(RT::Point(0, std::sqrt(2) / 2, -std::sqrt(2) / 2)),
+              RT::Vector(0, 0.97014, -0.24254));
 }
