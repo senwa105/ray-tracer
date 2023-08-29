@@ -5,16 +5,16 @@ set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 set(SOURCES 
-    src/main.cpp 
+    # src/main.cpp 
     src/matrix.hpp 
-    src/color.hpp
-    src/canvas.hpp
-    src/transformations.hpp
-    src/ray.hpp
-    src/shapes.hpp
+    src/color.cpp
+    src/canvas.cpp
+    src/transformations.cpp
+    src/ray.cpp
+    src/shapes.h
 )
 
-add_executable(${PROJECT_NAME} ${SOURCES})
+add_executable(${PROJECT_NAME} src/main.cpp ${SOURCES})
 
 # Get GoogleTest
 include(FetchContent)
@@ -32,7 +32,7 @@ FetchContent_MakeAvailable(googletest)
 enable_testing()
 
 set(TEST_SOURCES
-    tests/matrix.test.cpp 
+    tests/matrix.test.cpp
     tests/color.test.cpp
     tests/canvas.test.cpp
     tests/transformations.test.cpp
@@ -41,12 +41,12 @@ set(TEST_SOURCES
 )
 
 foreach(SRC IN LISTS TEST_SOURCES)
-    cmake_path(GET SRC STEM LAST_ONLY EXE_NAME)
-    list(APPEND TEST_EXECUTABLES ${EXE_NAME})
+    cmake_path(GET SRC STEM TEST_NAME)
+    list(APPEND TEST_EXECUTABLES ${TEST_NAME}.test)
 
-    add_executable(${EXE_NAME} ${SRC})
-    target_link_libraries(${EXE_NAME} GTest::gtest_main)
-    target_include_directories(${EXE_NAME} PUBLIC src)
+    add_executable(${TEST_NAME}.test ${SRC} ${SOURCES})
+    target_link_libraries(${TEST_NAME}.test GTest::gtest_main)
+    target_include_directories(${TEST_NAME}.test PUBLIC src)
 endforeach()
 
 include(CTest)
