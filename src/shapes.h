@@ -19,6 +19,8 @@ public:
     void SetTransform(const Matrix::Matrix4f transform) { transform_ = transform; }
 
     bool operator==(const Sphere&) const = default;
+
+    Matrix::Vector4f NormalAt(const Matrix::Vector4f point) const;
 };
 
 }
