@@ -1,6 +1,6 @@
 #include <gtest/gtest.h>
 #include <string>
-#include "canvas.hpp"
+#include "canvas.h"
 
 class CanvasTest : public ::testing::Test {
 protected:

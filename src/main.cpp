@@ -1,8 +1,9 @@
 #include <iostream>
 
 #include "matrix.hpp"
-#include "ray.hpp"
-#include "canvas.hpp"
+#include "transformations.h"
+#include "ray.h"
+#include "canvas.h"
 
 int main() {
     const float CAMERA_Z = -5;

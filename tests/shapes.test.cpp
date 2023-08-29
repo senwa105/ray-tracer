@@ -1,5 +1,5 @@
 #include <gtest/gtest.h>
-#include "shapes.hpp"
+#include "shapes.h"
 
 TEST(SphereTest, Initialization) {
     auto s = RT::Shapes::Sphere();

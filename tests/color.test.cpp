@@ -1,5 +1,5 @@
 #include <gtest/gtest.h>
-#include "color.hpp"
+#include "color.h"
 
 using namespace RT;
 

@@ -1,6 +1,7 @@
 #include <gtest/gtest.h>
-#include "ray.hpp"
-#include "shapes.hpp"
+#include "ray.h"
+#include "transformations.h"
+#include "shapes.h"
 #include "matrix.hpp"
 
 using namespace RT;
