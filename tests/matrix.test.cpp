@@ -251,11 +251,11 @@ TEST(MatrixTest, Transpose) {
                 9, 8, 8, 0, 
                 3, 0, 5, 5, 
                 0, 8, 3, 8});
-    EXPECT_EQ(Matrix4f::Transpose(a), b);
-    EXPECT_EQ(Matrix4f::Transpose(b), a);
+    EXPECT_EQ(a.Transpose(), b);
+    EXPECT_EQ(b.Transpose(), a);
 
     Matrix4f id = Matrix4f::Identity();
-    EXPECT_EQ(Matrix4f::Transpose(id), id);
+    EXPECT_EQ(id.Transpose(), id);
 }
 
 TEST(MatrixTest, Determinant2x2) {

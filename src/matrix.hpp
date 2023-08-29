@@ -55,11 +55,11 @@ public:
         return Matrix(entries);
     }
 
-    static constexpr Matrix<T, N, M> Transpose(const Matrix& m) noexcept {
+    constexpr Matrix Transpose() noexcept {
         std::array<T, N*M> transpose_entries{};
         for (size_t row = 0; row < M; ++row)
             for (size_t col = 0; col < N; ++col)
-                transpose_entries[col*N + row] = m.entries_[row*N + col];
+                transpose_entries[col*N + row] = entries_[row*N + col];
 
         return Matrix<T, N, M>(transpose_entries);
     }
