@@ -1,5 +1,4 @@
-#ifndef TRANSFORMATION_H
-#define TRANSFORMATION_H
+#include "transformations.h"
 
 #include <cmath>
 #include "matrix.hpp"
@@ -72,5 +71,3 @@ Matrix::Matrix4f Shear(const float xToY, const float xToZ,
 }
 
 }
-
-#endif

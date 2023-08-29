@@ -7,7 +7,7 @@
 #include <memory>
 #include <optional>
 #include "matrix.hpp"
-#include "transformations.hpp"
+#include "transformations.h"
 #include "shapes.hpp"
 
 namespace RT {

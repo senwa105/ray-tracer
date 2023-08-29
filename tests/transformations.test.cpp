@@ -1,7 +1,7 @@
 #include <cmath>
 #include <numbers>
 #include <gtest/gtest.h>
-#include "transformations.hpp"
+#include "transformations.h"
 
 TEST(TransformationsTest, Translate) {
     auto p = RT::Point(-3, 4, 5);
