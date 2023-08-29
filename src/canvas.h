@@ -3,7 +3,7 @@
 
 #include <vector>
 #include <string>
-#include "color.hpp"
+#include "color.h"
 
 namespace RT {
 

@@ -9,7 +9,7 @@
 #include <fstream>
 #include <cerrno>
 #include <cstdio>
-#include "color.hpp"
+#include "color.h"
 
 namespace RT {
 
