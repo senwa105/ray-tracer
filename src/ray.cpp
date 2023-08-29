@@ -4,7 +4,7 @@
 #include <cmath>
 #include "matrix.hpp"
 #include "transformations.h"
-#include "shapes.hpp"
+#include "shapes.h"
 
 namespace RT {
 

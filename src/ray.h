@@ -6,7 +6,7 @@
 #include <optional>
 #include <algorithm>
 #include "matrix.hpp"
-#include "shapes.hpp"
+#include "shapes.h"
 
 namespace RT {
 
