@@ -70,4 +70,8 @@ Matrix::Matrix4f Shear(const float xToY, const float xToZ,
     return t;
 }
 
+Matrix::Vector4f Reflect(const Matrix::Vector4f& vector, const Matrix::Vector4f& normal) {
+    return vector - normal * 2 * Dot(vector, normal);
+}
+
 }

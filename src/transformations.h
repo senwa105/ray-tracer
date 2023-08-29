@@ -20,6 +20,8 @@ Matrix::Matrix4f Shear(const float xToY, const float xToZ,
                        const float yToX, const float yToZ,
                        const float zToX, const float zToY);
 
+Matrix::Vector4f Reflect(const Matrix::Vector4f& vector, const Matrix::Vector4f& normal);
+
 }
 
 #endif
