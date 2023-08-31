@@ -52,3 +52,13 @@ TEST(SphereTest, TransformedNormalAt) {
     EXPECT_EQ(s.NormalAt(RT::Point(0, std::sqrt(2) / 2, -std::sqrt(2) / 2)),
               RT::Vector(0, 0.97014, -0.24254));
 }
+
+TEST(SphereTest, Material) {
+    auto s = RT::Shapes::Sphere();
+    EXPECT_EQ(s.GetMaterial(), RT::Material());
+
+    auto m = RT::Material();
+    m.ambient = 1;
+    s.SetMaterial(m);
+    EXPECT_EQ(s.GetMaterial(), m);
+}
