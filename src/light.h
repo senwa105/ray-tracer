@@ -11,6 +11,15 @@ struct PointLight {
     Matrix::Vector4f position{Point(0, 0, 0)};
 };
 
+struct Material {
+    Color color{};
+    float ambient{};
+    float diffuse{};
+    float specular{};
+    float shininess{};
+};
+
+
 }
 
 #endif
