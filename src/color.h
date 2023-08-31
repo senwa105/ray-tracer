@@ -74,6 +74,14 @@ public:
     friend Color operator*(const Color& a, const Color& b) {
         return Color(Hadamard(a.rgb_, b.rgb_));
     }
+
+    friend Color operator*(const Color& a, const float f) {
+        return Color(f * a.rgb_);
+    }
+
+    friend Color operator*(const float f, const Color& a) {
+        return Color(f * a.rgb_);
+    }
 };
 
 }
