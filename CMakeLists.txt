@@ -12,6 +12,7 @@ set(SOURCES
     src/transformations.cpp
     src/ray.cpp
     src/shapes.cpp
+    src/light.h
 )
 
 add_executable(${PROJECT_NAME} src/main.cpp ${SOURCES})
@@ -38,6 +39,7 @@ set(TEST_SOURCES
     tests/transformations.test.cpp
     tests/ray.test.cpp
     tests/shapes.test.cpp
+    tests/light.test.cpp
 )
 
 foreach(SRC IN LISTS TEST_SOURCES)
