@@ -12,7 +12,7 @@ set(SOURCES
     src/transformations.cpp
     src/ray.cpp
     src/shapes.cpp
-    src/light.h
+    src/light.cpp
 )
 
 add_executable(${PROJECT_NAME} src/main.cpp ${SOURCES})
