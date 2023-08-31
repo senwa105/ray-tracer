@@ -7,19 +7,25 @@
 namespace RT {
 
 struct PointLight {
-    Color intensity{};
     Matrix::Vector4f position{Point(0, 0, 0)};
+    Color intensity{};
 };
 
 struct Material {
-    Color color{};
-    float ambient{};
-    float diffuse{};
-    float specular{};
-    float shininess{};
+    Color color{Color({1, 1, 1})};
+    float ambient{0.1};
+    float diffuse{0.9};
+    float specular{0.9};
+    float shininess{200.0};
 
     bool operator==(const Material&) const = default;
 };
+
+Color Lighting(const Material& material,
+               const PointLight& light,
+               const Matrix::Vector4f& point,
+               const Matrix::Vector4f& eyeVector,
+               const Matrix::Vector4f& normal);
 
 }
 
