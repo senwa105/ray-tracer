@@ -6,7 +6,7 @@
 namespace RT {
 
 Matrix::Vector4f NewPoint(const float x, const float y, const float z);
-Matrix::Vector4f Vector(const float x, const float y, const float z);
+Matrix::Vector4f NewVector(const float x, const float y, const float z);
 
 Matrix::Matrix4f Translate(const float x, const float y, const float z);
 

@@ -9,7 +9,7 @@ Matrix::Vector4f NewPoint(const float x, const float y, const float z) {
     return Matrix::Vector4f({x, y, z, 1});
 }
 
-Matrix::Vector4f Vector(const float x, const float y, const float z) {
+Matrix::Vector4f NewVector(const float x, const float y, const float z) {
     return Matrix::Vector4f({x, y, z, 0});
 }
 

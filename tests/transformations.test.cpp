@@ -5,7 +5,7 @@
 
 TEST(TransformationsTest, Translate) {
     auto p = RT::NewPoint(-3, 4, 5);
-    auto v = RT::Vector(-3, 4, 5);
+    auto v = RT::NewVector(-3, 4, 5);
     auto t = RT::Translate(5, -3, 2);
 
     auto a = RT::NewPoint(2, 1, 7);
@@ -18,12 +18,12 @@ TEST(TransformationsTest, Translate) {
 
 TEST(TransformationsTest, Scale) {
     auto p = RT::NewPoint(-4, 6, 8);
-    auto v = RT::Vector(-4, 6, 8);
+    auto v = RT::NewVector(-4, 6, 8);
     auto t = RT::Scale(2, 3, 4);
 
     auto a = RT::NewPoint(-8, 18, 32);
-    auto b = RT::Vector(-8, 18, 32);
-    auto c = RT::Vector(-2, 2, 2);
+    auto b = RT::NewVector(-8, 18, 32);
+    auto c = RT::NewVector(-2, 2, 2);
 
     EXPECT_EQ(t * p, a);
     EXPECT_EQ(t * v, b);
@@ -119,11 +119,11 @@ TEST(TransformationsTest, ChainedTransformations) {
 }
 
 TEST(TransformationsTest, ReflectAcrossNormal) {
-    auto v = RT::Vector(1, -1, 0);
-    auto n = RT::Vector(0, 1, 0);
-    EXPECT_EQ(RT::Reflect(v, n), RT::Vector(1, 1, 0));
+    auto v = RT::NewVector(1, -1, 0);
+    auto n = RT::NewVector(0, 1, 0);
+    EXPECT_EQ(RT::Reflect(v, n), RT::NewVector(1, 1, 0));
 
-    v = RT::Vector(0, -1, 0);
-    n = RT::Vector(std::sqrt(2) / 2, std::sqrt(2) / 2, 0);
-    EXPECT_EQ(RT::Reflect(v, n), RT::Vector(1, 0, 0));
+    v = RT::NewVector(0, -1, 0);
+    n = RT::NewVector(std::sqrt(2) / 2, std::sqrt(2) / 2, 0);
+    EXPECT_EQ(RT::Reflect(v, n), RT::NewVector(1, 0, 0));
 }

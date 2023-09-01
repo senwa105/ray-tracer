@@ -8,7 +8,7 @@ using namespace RT;
 
 TEST(RayTest, Initialization) {
     auto o = NewPoint(1, 2, 3);
-    auto d = Vector(4, 5, 6);
+    auto d = NewVector(4, 5, 6);
     auto r = Ray(o, d);
 
     EXPECT_EQ(r.origin, o);
@@ -16,7 +16,7 @@ TEST(RayTest, Initialization) {
 }
 
 TEST(RayTest, Position) {
-    auto r = Ray(NewPoint(2, 3, 4), Vector(1, 0, 0));
+    auto r = Ray(NewPoint(2, 3, 4), NewVector(1, 0, 0));
 
     EXPECT_EQ(Position(r, 0), NewPoint(2, 3, 4));
     EXPECT_EQ(Position(r, 1), NewPoint(3, 3, 4));
@@ -25,7 +25,7 @@ TEST(RayTest, Position) {
 }
 
 TEST(RayTest, SphereIntersection) {
-    auto r = Ray(NewPoint(0, 0, -5), Vector(0, 0, 1));
+    auto r = Ray(NewPoint(0, 0, -5), NewVector(0, 0, 1));
     auto s = Shapes::Sphere();
 
     auto xs = Intersect(s, r);
@@ -37,7 +37,7 @@ TEST(RayTest, SphereIntersection) {
 }
 
 TEST(RayTest, SphereTangentIntersection) {
-    auto r = Ray(NewPoint(0, 1, -5), Vector(0, 0, 1));
+    auto r = Ray(NewPoint(0, 1, -5), NewVector(0, 0, 1));
     auto s = Shapes::Sphere();
 
     auto xs = Intersect(s, r);
@@ -47,7 +47,7 @@ TEST(RayTest, SphereTangentIntersection) {
 }
 
 TEST(RayTest, SphereNoIntersection) {
-    auto r = Ray(NewPoint(0, 2, -5), Vector(0, 0, 1));
+    auto r = Ray(NewPoint(0, 2, -5), NewVector(0, 0, 1));
     auto s = Shapes::Sphere();
 
     auto xs = Intersect(s, r);
@@ -55,7 +55,7 @@ TEST(RayTest, SphereNoIntersection) {
 }
 
 TEST(RayTest, SphereInsideIntersection) {
-    auto r = Ray(NewPoint(0, 0, 0), Vector(0, 0, 1));
+    auto r = Ray(NewPoint(0, 0, 0), NewVector(0, 0, 1));
     auto s = Shapes::Sphere();
 
     auto xs = Intersect(s, r);
@@ -65,7 +65,7 @@ TEST(RayTest, SphereInsideIntersection) {
 }
 
 TEST(RayTest, SphereRearIntersection) {
-    auto r = Ray(NewPoint(0, 0, 5), Vector(0, 0, 1));
+    auto r = Ray(NewPoint(0, 0, 5), NewVector(0, 0, 1));
     auto s = Shapes::Sphere();
 
     auto xs = Intersect(s, r);
@@ -119,25 +119,25 @@ TEST(RayTest, Hit) {
 }
 
 TEST(RayTest, Transform) {
-    auto r = Ray(NewPoint(1, 2, 3), Vector(0, 1, 0));
+    auto r = Ray(NewPoint(1, 2, 3), NewVector(0, 1, 0));
 
     auto t = Translate(3, 4, 5);
     auto o1 = NewPoint(4, 6, 8);
-    auto d1 = Vector(0, 1, 0);
+    auto d1 = NewVector(0, 1, 0);
     auto r2 = Transform(r, t);  
     EXPECT_EQ(r2.origin, o1);
     EXPECT_EQ(r2.direction, d1);
 
     auto s = Scale(2, 3, 4);
     auto o2 = NewPoint(2, 6, 12);
-    auto d2 = Vector(0, 3, 0);
+    auto d2 = NewVector(0, 3, 0);
     auto r3 = Transform(r, s);
     EXPECT_EQ(r3.origin, o2);
     EXPECT_EQ(r3.direction, d2);
 }
 
 TEST(RayTest, IntersectScaledSphere) {
-    auto r = Ray(NewPoint(0, 0, -5), Vector(0, 0, 1));
+    auto r = Ray(NewPoint(0, 0, -5), NewVector(0, 0, 1));
     auto s = Shapes::Sphere();
 
     s.SetTransform(Scale(2, 2, 2));
