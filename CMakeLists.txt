@@ -7,6 +7,7 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 set(SOURCES 
     # src/main.cpp 
     src/matrix.hpp 
+    src/pointvector.hpp
     src/color.cpp
     src/canvas.cpp
     src/transformations.cpp
