@@ -4,12 +4,12 @@
 #include "transformations.h"
 
 TEST(TransformationsTest, Translate) {
-    auto p = RT::Point(-3, 4, 5);
+    auto p = RT::NewPoint(-3, 4, 5);
     auto v = RT::Vector(-3, 4, 5);
     auto t = RT::Translate(5, -3, 2);
 
-    auto a = RT::Point(2, 1, 7);
-    auto b = RT::Point(-8, 7, 3);
+    auto a = RT::NewPoint(2, 1, 7);
+    auto b = RT::NewPoint(-8, 7, 3);
     
     EXPECT_EQ(t * p, a);
     EXPECT_EQ(t.Inverse() * p, b);
@@ -17,11 +17,11 @@ TEST(TransformationsTest, Translate) {
 }
 
 TEST(TransformationsTest, Scale) {
-    auto p = RT::Point(-4, 6, 8);
+    auto p = RT::NewPoint(-4, 6, 8);
     auto v = RT::Vector(-4, 6, 8);
     auto t = RT::Scale(2, 3, 4);
 
-    auto a = RT::Point(-8, 18, 32);
+    auto a = RT::NewPoint(-8, 18, 32);
     auto b = RT::Vector(-8, 18, 32);
     auto c = RT::Vector(-2, 2, 2);
 
@@ -31,21 +31,21 @@ TEST(TransformationsTest, Scale) {
 }
 
 TEST(TransformationsTest, Reflect) {
-    auto p = RT::Point(2, 3, 4);
+    auto p = RT::NewPoint(2, 3, 4);
     auto t = RT::Scale(-1, 1, 1);
-    auto a = RT::Point(-2, 3, 4);
+    auto a = RT::NewPoint(-2, 3, 4);
 
     EXPECT_EQ(t * p, a);
 }
 
 TEST(TransformationsTest, RotateX) {
-    auto p = RT::Point(0, 1, 0);
+    auto p = RT::NewPoint(0, 1, 0);
     auto deg45 = RT::RotateX(std::numbers::pi / 4);
     auto deg90 = RT::RotateX(std::numbers::pi / 2);
 
-    auto a = RT::Point(0, std::sqrt(2) / 2, std::sqrt(2) / 2);
-    auto b = RT::Point(0, 0, 1);
-    auto c = RT::Point(0, std::sqrt(2) / 2, -std::sqrt(2) / 2);
+    auto a = RT::NewPoint(0, std::sqrt(2) / 2, std::sqrt(2) / 2);
+    auto b = RT::NewPoint(0, 0, 1);
+    auto c = RT::NewPoint(0, std::sqrt(2) / 2, -std::sqrt(2) / 2);
 
     EXPECT_EQ(deg45 * p, a);
     EXPECT_EQ(deg90 * p, b);
@@ -53,13 +53,13 @@ TEST(TransformationsTest, RotateX) {
 }
 
 TEST(TransformationsTest, RotateY) {
-    auto p = RT::Point(0, 0, 1);
+    auto p = RT::NewPoint(0, 0, 1);
     auto deg45 = RT::RotateY(std::numbers::pi / 4);
     auto deg90 = RT::RotateY(std::numbers::pi / 2);
 
-    auto a = RT::Point(std::sqrt(2) / 2, 0, std::sqrt(2) / 2);
-    auto b = RT::Point(1, 0, 0);
-    auto c = RT::Point(-std::sqrt(2) / 2, 0, std::sqrt(2) / 2);
+    auto a = RT::NewPoint(std::sqrt(2) / 2, 0, std::sqrt(2) / 2);
+    auto b = RT::NewPoint(1, 0, 0);
+    auto c = RT::NewPoint(-std::sqrt(2) / 2, 0, std::sqrt(2) / 2);
 
     EXPECT_EQ(deg45 * p, a);
     EXPECT_EQ(deg90 * p, b);
@@ -67,13 +67,13 @@ TEST(TransformationsTest, RotateY) {
 }
 
 TEST(TransformationsTest, RotateZ) {
-    auto p = RT::Point(0, 1, 0);
+    auto p = RT::NewPoint(0, 1, 0);
     auto deg45 = RT::RotateZ(std::numbers::pi / 4);
     auto deg90 = RT::RotateZ(std::numbers::pi / 2);
 
-    auto a = RT::Point(-std::sqrt(2) / 2, std::sqrt(2) / 2, 0);
-    auto b = RT::Point(-1, 0, 0);
-    auto c = RT::Point(std::sqrt(2) / 2, std::sqrt(2) / 2, 0);
+    auto a = RT::NewPoint(-std::sqrt(2) / 2, std::sqrt(2) / 2, 0);
+    auto b = RT::NewPoint(-1, 0, 0);
+    auto c = RT::NewPoint(std::sqrt(2) / 2, std::sqrt(2) / 2, 0);
 
     EXPECT_EQ(deg45 * p, a);
     EXPECT_EQ(deg90 * p, b);
@@ -81,7 +81,7 @@ TEST(TransformationsTest, RotateZ) {
 }
 
 TEST(TransformationsTest, Shear) {
-    auto p = RT::Point(2, 3, 4);
+    auto p = RT::NewPoint(2, 3, 4);
 
     auto t1 = RT::Shear(1, 0, 0, 0, 0, 0);
     auto t2 = RT::Shear(0, 1, 0, 0, 0, 0);
@@ -90,12 +90,12 @@ TEST(TransformationsTest, Shear) {
     auto t5 = RT::Shear(0, 0, 0, 0, 1, 0);
     auto t6 = RT::Shear(0, 0, 0, 0, 0, 1);
 
-    auto a1 = RT::Point(5, 3, 4);
-    auto a2 = RT::Point(6, 3, 4);
-    auto a3 = RT::Point(2, 5, 4);
-    auto a4 = RT::Point(2, 7, 4);
-    auto a5 = RT::Point(2, 3, 6);
-    auto a6 = RT::Point(2, 3, 7);
+    auto a1 = RT::NewPoint(5, 3, 4);
+    auto a2 = RT::NewPoint(6, 3, 4);
+    auto a3 = RT::NewPoint(2, 5, 4);
+    auto a4 = RT::NewPoint(2, 7, 4);
+    auto a5 = RT::NewPoint(2, 3, 6);
+    auto a6 = RT::NewPoint(2, 3, 7);
 
     EXPECT_EQ(t1 * p, a1);
     EXPECT_EQ(t2 * p, a2);
@@ -106,7 +106,7 @@ TEST(TransformationsTest, Shear) {
 }
 
 TEST(TransformationsTest, ChainedTransformations) {
-    auto p = RT::Point(1, 0, 1);
+    auto p = RT::NewPoint(1, 0, 1);
     auto r = RT::RotateX(std::numbers::pi / 2);
     auto s = RT::Scale(5, 5, 5);
     auto t = RT::Translate(10, 5, 7);

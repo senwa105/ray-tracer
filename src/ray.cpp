@@ -18,7 +18,7 @@ Ray Transform(const Ray& ray, const Matrix::Matrix4f& transformation) {
 
 std::vector<Intersection<Shapes::Sphere>> Intersect(const Shapes::Sphere& sphere, const Ray& ray) {
     Ray ray2 = Transform(ray, sphere.GetTransform().Inverse());
-    Matrix::Vector4f sphereToRay = ray2.origin - Point(0, 0, 0);
+    Matrix::Vector4f sphereToRay = ray2.origin - NewPoint(0, 0, 0);
 
     float a = Dot(ray2.direction, ray2.direction);
     float b = 2 * Dot(ray2.direction, sphereToRay);

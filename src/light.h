@@ -7,7 +7,7 @@
 namespace RT {
 
 struct PointLight {
-    Matrix::Vector4f position{Point(0, 0, 0)};
+    Matrix::Vector4f position{NewPoint(0, 0, 0)};
     Color intensity{};
 };
 
