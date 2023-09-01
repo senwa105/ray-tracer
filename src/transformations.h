@@ -1,26 +1,28 @@
 #ifndef TRANSFORMATION_H
 #define TRANSFORMATION_H
 
-#include "matrix.hpp"
+#include "pointvector.hpp"
 
 namespace RT {
 
-Matrix::Vector4f NewPoint(const float x, const float y, const float z);
-Matrix::Vector4f NewVector(const float x, const float y, const float z);
+using Transformation = Matrix::Matrix4f;
 
-Matrix::Matrix4f Translate(const float x, const float y, const float z);
+Point NewPoint(const float x, const float y, const float z);
+Vector NewVector(const float x, const float y, const float z);
 
-Matrix::Matrix4f Scale(const float x, const float y, const float z);
+Transformation Translate(const float x, const float y, const float z);
 
-Matrix::Matrix4f RotateX(const float radians);
-Matrix::Matrix4f RotateY(const float radians);
-Matrix::Matrix4f RotateZ(const float radians);
+Transformation Scale(const float x, const float y, const float z);
 
-Matrix::Matrix4f Shear(const float xToY, const float xToZ,
+Transformation RotateX(const float radians);
+Transformation RotateY(const float radians);
+Transformation RotateZ(const float radians);
+
+Transformation Shear(const float xToY, const float xToZ,
                        const float yToX, const float yToZ,
                        const float zToX, const float zToY);
 
-Matrix::Vector4f Reflect(const Matrix::Vector4f& vector, const Matrix::Vector4f& normal);
+Vector Reflect(const Vector& vector, const Vector& normal);
 
 }
 

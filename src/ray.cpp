@@ -2,17 +2,17 @@
 
 #include <vector>
 #include <cmath>
-#include "matrix.hpp"
+#include "pointvector.hpp"
 #include "transformations.h"
 #include "shapes.h"
 
 namespace RT {
 
-Matrix::Vector4f Position(const Ray& ray, const float t) {
+Point Position(const Ray& ray, const float t) {
     return ray.origin + ray.direction * t;
 }
 
-Ray Transform(const Ray& ray, const Matrix::Matrix4f& transformation) {
+Ray Transform(const Ray& ray, const Transformation& transformation) {
     return Ray{transformation * ray.origin, transformation * ray.direction};
 }
 
