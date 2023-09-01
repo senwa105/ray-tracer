@@ -1,14 +1,11 @@
 #ifndef TRANSFORMATION_H
 #define TRANSFORMATION_H
 
-#include "pointvector.hpp"
+#include "pointvector.h"
 
 namespace RT {
 
 using Transformation = Matrix::Matrix4f;
-
-Point NewPoint(const float x, const float y, const float z);
-Vector NewVector(const float x, const float y, const float z);
 
 Transformation Translate(const float x, const float y, const float z);
 

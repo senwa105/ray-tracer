@@ -1,6 +1,5 @@
 #include "shapes.h"
-#include "pointvector.hpp"
-#include "transformations.h"
+#include "pointvector.h"
 
 namespace RT::Shapes {
 

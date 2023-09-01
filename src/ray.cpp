@@ -2,7 +2,7 @@
 
 #include <vector>
 #include <cmath>
-#include "pointvector.hpp"
+#include "pointvector.h"
 #include "transformations.h"
 #include "shapes.h"
 

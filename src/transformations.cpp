@@ -1,17 +1,9 @@
 #include "transformations.h"
 
 #include <cmath>
-#include "pointvector.hpp"
+#include "pointvector.h"
 
 namespace RT {
-
-Point NewPoint(const float x, const float y, const float z) {
-    return Vector({x, y, z, 1});
-}
-
-Vector NewVector(const float x, const float y, const float z) {
-    return Vector({x, y, z, 0});
-}
 
 Transformation Translate(const float x, const float y, const float z) {
     Transformation t = Transformation::Identity();

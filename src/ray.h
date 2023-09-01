@@ -5,7 +5,7 @@
 #include <memory>
 #include <optional>
 #include <algorithm>
-#include "pointvector.hpp"
+#include "pointvector.h"
 #include "shapes.h"
 
 namespace RT {

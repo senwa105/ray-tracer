@@ -1,9 +1,8 @@
 #ifndef LIGHT_H
 #define LIGHT_H
 
-#include "pointvector.hpp"
+#include "pointvector.h"
 #include "color.h"
-#include "transformations.h"
 
 namespace RT {
 

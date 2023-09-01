@@ -1,7 +1,6 @@
 #include <iostream>
 
-#include "matrix.hpp"
-#include "transformations.h"
+#include "pointvector.h"
 #include "ray.h"
 #include "light.h"
 #include "canvas.h"

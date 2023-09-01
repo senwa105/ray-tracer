@@ -1,7 +1,7 @@
 #ifndef SHAPES_H
 #define SHAPES_H
 
-#include "pointvector.hpp"
+#include "pointvector.h"
 #include "transformations.h"
 #include "light.h"
 

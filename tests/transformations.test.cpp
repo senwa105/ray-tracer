@@ -2,6 +2,7 @@
 #include <numbers>
 #include <gtest/gtest.h>
 #include "transformations.h"
+#include "pointvector.h"
 
 TEST(TransformationsTest, Translate) {
     auto p = RT::NewPoint(-3, 4, 5);

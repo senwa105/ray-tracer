@@ -1,7 +1,8 @@
 #include "light.h"
 
 #include <cmath>
-#include "pointvector.hpp"
+#include "pointvector.h"
+#include "transformations.h"
 
 namespace RT {
 
