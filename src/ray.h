@@ -5,7 +5,7 @@
 #include <memory>
 #include <optional>
 #include <algorithm>
-#include "matrix.hpp"
+#include "pointvector.h"
 #include "shapes.h"
 
 namespace RT {
@@ -27,11 +27,11 @@ struct Intersection {
 };
 
 struct Ray {
-    Matrix::Vector4f origin{};
-    Matrix::Vector4f direction{};
+    Point origin{};
+    Vector direction{};
 };
 
-Matrix::Vector4f Position(const Ray& ray, const float t);
+Point Position(const Ray& ray, const float t);
 
 Ray Transform(const Ray& ray, const Matrix::Matrix4f& transformation);
 

@@ -1,7 +1,6 @@
 #include <iostream>
 
-#include "matrix.hpp"
-#include "transformations.h"
+#include "pointvector.h"
 #include "ray.h"
 #include "light.h"
 #include "canvas.h"
@@ -13,7 +12,7 @@ int main() {
 
     const int RESOLUTION = 500; 
 
-    auto camera = RT::Point(0, 0, CAMERA_Z);
+    auto camera = RT::NewPoint(0, 0, CAMERA_Z);
 
     float pixelSize = WALL_SIZE / RESOLUTION;
     float half = WALL_SIZE / 2;
@@ -27,7 +26,7 @@ int main() {
     mat.color = RT::Color({1, 0.2, 1});
     shape.SetMaterial(mat);
 
-    auto lightPosition = RT::Point(-10, 10, -10);
+    auto lightPosition = RT::NewPoint(-10, 10, -10);
     auto lightColor = RT::Color({1, 1, 1});
     auto light = RT::PointLight(lightPosition, lightColor);
 
@@ -35,7 +34,7 @@ int main() {
         float yWorld = half - pixelSize * y;
         for (size_t x = 0; x < RESOLUTION; ++x) {
             float xWorld = -half + pixelSize * x;
-            auto position = RT::Point(xWorld, yWorld, WALL_Z);
+            auto position = RT::NewPoint(xWorld, yWorld, WALL_Z);
             auto ray = RT::Ray(camera, Normalize(position - camera));
             auto xs = RT::Intersect(shape, ray);
 

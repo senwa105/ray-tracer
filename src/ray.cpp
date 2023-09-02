@@ -2,23 +2,23 @@
 
 #include <vector>
 #include <cmath>
-#include "matrix.hpp"
+#include "pointvector.h"
 #include "transformations.h"
 #include "shapes.h"
 
 namespace RT {
 
-Matrix::Vector4f Position(const Ray& ray, const float t) {
+Point Position(const Ray& ray, const float t) {
     return ray.origin + ray.direction * t;
 }
 
-Ray Transform(const Ray& ray, const Matrix::Matrix4f& transformation) {
+Ray Transform(const Ray& ray, const Transformation& transformation) {
     return Ray{transformation * ray.origin, transformation * ray.direction};
 }
 
 std::vector<Intersection<Shapes::Sphere>> Intersect(const Shapes::Sphere& sphere, const Ray& ray) {
     Ray ray2 = Transform(ray, sphere.GetTransform().Inverse());
-    Matrix::Vector4f sphereToRay = ray2.origin - Point(0, 0, 0);
+    Matrix::Vector4f sphereToRay = ray2.origin - NewPoint(0, 0, 0);
 
     float a = Dot(ray2.direction, ray2.direction);
     float b = 2 * Dot(ray2.direction, sphereToRay);

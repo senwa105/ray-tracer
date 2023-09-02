@@ -1,14 +1,16 @@
 #include "light.h"
 
 #include <cmath>
+#include "pointvector.h"
+#include "transformations.h"
 
 namespace RT {
 
 Color Lighting(const Material& material,
                const PointLight& light,
-               const Matrix::Vector4f& point,
-               const Matrix::Vector4f& eyeVector,
-               const Matrix::Vector4f& normal) {
+               const Point& point,
+               const Vector& eyeVector,
+               const Vector& normal) {
     // Combine surface color and light color
     auto effectiveColor = material.color * light.intensity;
 
